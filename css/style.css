@@ -150,7 +150,7 @@ body {
   position: absolute;
   top: 879.3px;
   left: 58.3px;
-  width: 1538px;
+  right: calc((1600px - 100vw) / 2);
   height: 3027px;
   background-color: var(--colorPaper);
   background-image:
