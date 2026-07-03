@@ -193,6 +193,7 @@ body {
   background:
     linear-gradient(to right, #b9c7d0 50%, #818d94 50%) top / 100% 50% no-repeat,
     linear-gradient(to right, #818d94 50%, #b9c7d0 50%) bottom / 100% 50% no-repeat;
+  z-index: 1;
 }
 
 .aboutPhotoLabel {
@@ -212,6 +213,7 @@ body {
   width: 750.8px;
   height: 613.6px;
   background: #fff;
+  z-index: 2;
 }
 
 .aboutCardTitle {
@@ -715,7 +717,7 @@ body {
     width: calc(100% - 30px);
     max-width: 470px;
     aspect-ratio: 804 / 629;
-    margin: 0;
+    margin: -44px 0 0;
   }
   .aboutPhotoLabel {
     top: 50%;
@@ -729,7 +731,7 @@ body {
     width: auto;
     height: auto;
     max-width: 520px;
-    margin: -44px 14px 0 30px;
+    margin: 0 14px 0 30px;
     padding: 26px 20px 30px;
   }
   .aboutCardTitle {
