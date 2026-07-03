@@ -106,11 +106,9 @@ body {
 
 .globalNavItem a {
   display: block;
-  font-size: 20px;
+  font-size: 23px;
   font-weight: 500;
   line-height: 22px;
-  letter-spacing: 0.28em;
-  margin-right: -0.28em;
   color: var(--colorBrand);
   transition: opacity 0.25s;
 }
