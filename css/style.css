@@ -575,7 +575,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 100;
+    z-index: 130; /* .spDrawer(110) より上にして、開いた状態でもメニューボタンを押せるようにする */
     display: flex;
     justify-content: space-between;
     align-items: center;
