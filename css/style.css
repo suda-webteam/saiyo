@@ -1,0 +1,1137 @@
+@charset "UTF-8";
+/* ============================================================
+  株式会社須田製版 採用サイト TOP
+  デザインカンプ基準幅：1600px / 高さ：4305px
+  ※ カンプ由来の絶対配置コーディングです(詳細は README.md)
+============================================================ */
+
+/* ---------- 変数 ---------- */
+:root {
+  --colorBrand: #1e57a0;      /* メインブルー */
+  --colorCyan: #5accf9;       /* 水色 */
+  --colorPink: #ec70d3;       /* ピンク */
+  --colorYellow: #fbe454;     /* イエロー */
+  --colorText: #030000;       /* 本文 */
+  --colorPaper: #f3f3ed;      /* 方眼紙ベース */
+  --fontGothic: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  --fontMaru: "Zen Maru Gothic", "Zen Kaku Gothic New", sans-serif;
+}
+
+/* ---------- リセット ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+img { display: block; }
+ul, li { list-style: none; }
+a { text-decoration: none; color: inherit; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--fontGothic);
+  color: var(--colorText);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- ページ基盤(カンプ座標系) ---------- */
+.page {
+  position: relative;
+  width: 1600px;
+  height: 4305px;
+  margin: 0 auto;
+  /* グネグネ模様を1600px外へ伸ばすため overflow は解放(横はビューポートで .pageScaler がクリップ) */
+}
+
+/* ============================================================
+  ヒーロー / グローバルナビ
+============================================================ */
+.heroSky,
+.heroVisual {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1600px;
+  height: 843px;
+}
+
+.heroSquiggle { position: absolute; pointer-events: none; }
+.squiggleHeroPink   { top: -19px;  left: 83.5px;   width: 857px; }
+.squiggleHeroYellow { top: 506px;  left: -1201px;  width: 1977px; }
+.squiggleHeroCyan   { top: 506px;  left: 855px;    width: 2231.5px; }
+
+.spOnly { display: none; }
+
+.trimTop {
+  position: absolute;
+  top: 1.5px;
+  left: 0;
+  width: 1597px;
+  pointer-events: none;
+}
+
+.globalNav {
+  position: absolute;
+  top: 0;
+  left: 1296px;
+  width: 304px;
+  height: 843px;
+}
+
+.siteLogo {
+  position: absolute;
+  top: 78px;
+  left: 39px; /* page基準 1335px */
+}
+.siteLogo img { width: 206.5px; height: auto; }
+
+.siteLogoCaption {
+  display: block;
+  margin-top: 7px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-indent: 0.24em;
+  color: var(--colorBrand);
+}
+
+.globalNavList {
+  position: absolute;
+  top: 197px;
+  right: 60px; /* テキスト右端 x=1540 */
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  text-align: right;
+}
+
+.globalNavItem a {
+  display: block;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 0.28em;
+  margin-right: -0.28em;
+  color: var(--colorBrand);
+  transition: opacity 0.25s;
+}
+.globalNavItem a:hover { opacity: 0.6; }
+
+.officialSiteBtn,
+.footerOfficialBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 204px;
+  height: 48px;
+  border: 1px solid var(--colorBrand);
+  border-radius: 10px;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.48em;
+  text-indent: 0.48em;
+  color: var(--colorBrand);
+  transition: background-color 0.25s, color 0.25s;
+}
+.officialSiteBtn:hover,
+.footerOfficialBtn:hover {
+  background: var(--colorBrand);
+  color: #fff;
+}
+
+.officialSiteBtn {
+  position: absolute;
+  top: 514px;
+  left: 44px; /* page基準 1340px */
+}
+
+/* ============================================================
+  方眼紙背景・スウォッシュ(装飾)
+============================================================ */
+.gridPaper {
+  position: absolute;
+  top: 879.3px;
+  left: 58.3px;
+  width: 1538px;
+  height: 3027px;
+  background-color: var(--colorPaper);
+  background-image:
+    repeating-linear-gradient(to right,
+      rgba(90, 204, 249, 0.085) 0 2px, transparent 2px 35.75px),
+    repeating-linear-gradient(to bottom,
+      rgba(90, 204, 249, 0.085) 0 2px, transparent 2px 35.75px);
+  background-position: 34.9px 14.4px;
+}
+
+.squiggleBlue   { position: absolute; top: 920.5px; left: -1207px;   width: 4088px; pointer-events: none; }
+.squiggleYellow { position: absolute; top: 1664px;   left: -1199.5px; width: 1949px; pointer-events: none; }
+.squigglePink   { position: absolute; top: 2706px;   left: -1200.5px; width: 3999px; pointer-events: none; }
+
+/* ============================================================
+  セクションタイトル共通
+============================================================ */
+.sectionTitle {
+  position: absolute;
+  font-family: var(--fontMaru);
+  font-size: 43px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--colorBrand);
+}
+
+/* ============================================================
+  About us
+============================================================ */
+.aboutTitle { top: 950px; left: 312px; }
+
+/* 写真プレースホルダー(実写真に差し替え前提) */
+.aboutPhoto {
+  position: absolute;
+  top: 1058.6px;
+  left: -14px;
+  width: 804.3px;
+  height: 628.7px;
+  background:
+    linear-gradient(to right, #b9c7d0 50%, #818d94 50%) top / 100% 50% no-repeat,
+    linear-gradient(to right, #818d94 50%, #b9c7d0 50%) bottom / 100% 50% no-repeat;
+}
+
+.aboutPhotoLabel {
+  position: absolute;
+  top: 294px;  /* page基準 y=1353 */
+  left: 351px; /* page基準 x=337 */
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--colorText);
+}
+
+.aboutCard {
+  position: absolute;
+  top: 985.1px;
+  left: 747.9px;
+  width: 750.8px;
+  height: 613.6px;
+  background: #fff;
+}
+
+.aboutCardTitle {
+  position: absolute;
+  top: 72px;   /* page基準 y=1057 */
+  left: 97px; /* page基準 x=845 */
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.09em;
+}
+
+.aboutCardText {
+  position: absolute;
+  top: 142px; /* 1行目テキスト上端 y=1137 (行高分オフセット) */
+  left: 101px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 35px;
+  letter-spacing: 0.085em;
+}
+
+.aboutCardTextSecond { top: 422px; } /* 空行1行分を挟んだ2段落目 */
+
+/* ============================================================
+  ピル型ボタン共通(私たちの会社 / 仕事・人を知る)
+============================================================ */
+.pillBtn {
+  position: absolute;
+  display: block;
+  height: 67.9px;
+  border-radius: 34px;
+  background: var(--colorBrand);
+  transition: opacity 0.25s;
+}
+.pillBtn:hover { opacity: 0.85; }
+
+.pillBtn::before { /* 白い山型(>) */
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 41px;
+  width: 9px;
+  height: 9px;
+  border-top: 1.6px solid #fff;
+  border-right: 1.6px solid #fff;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.pillBtnLabel {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.companyBtn {
+  top: 1618.7px;
+  left: 1071.4px;
+  width: 428.9px;
+}
+.companyBtn .pillBtnLabel { left: 86px; }
+
+.companyBtnIcon {
+  position: absolute;
+  top: 6px;    /* page基準 y=1625 */
+  left: 247px; /* page基準 x=1318.5 */
+  width: 141px;
+  pointer-events: none;
+}
+
+.knowBtn {
+  top: 2518.4px;
+  left: 1181.1px;
+  width: 319.2px;
+}
+.knowBtn .pillBtnLabel { left: 88px; letter-spacing: 0.06em; }
+
+/* ============================================================
+  Work process
+============================================================ */
+.workTitle { top: 1827px; left: 313px; }
+
+.isomeIllust {
+  position: absolute;
+  top: 1818.5px;
+  left: 114px;
+  width: 1408.5px;
+}
+
+/* ============================================================
+  Interview
+============================================================ */
+.interviewTitle { top: 2694px; left: 315px; }
+
+.memberItem { position: absolute; }
+.memberItem img { width: 100%; height: auto; transition: transform 0.3s; }
+.memberItem a:hover img { transform: scale(1.04); }
+
+.memberMiura  { top: 2802px;   left: 17px;     width: 313.5px; }
+.memberKojima { top: 2876px;   left: 346px;    width: 313.5px; }
+.memberTakada { top: 2801.5px; left: 672px;    width: 317.5px; }
+.memberIrie   { top: 2871px;   left: 1001px;   width: 313.5px; }
+.memberChida  { top: 2801.5px; left: 1283px; width: 317px; }
+
+/* ---------- 若手座談会 ---------- */
+.crossTalkCard {
+  position: absolute;
+  top: 3295.5px;
+  left: 413.5px;
+  width: 802px;
+  pointer-events: none;
+}
+
+.crossTalkPaperclip {
+  position: absolute;
+  top: 3266px;
+  left: 370px;
+  width: 121px;
+  pointer-events: none;
+}
+
+.crossTalkPhoto { position: absolute; pointer-events: none; }
+.crossTalkPhoto04 { top: 3356.5px; left: 436px;    width: 101.5px; }
+.crossTalkPhoto03 { top: 3368px;   left: 546px;    width: 106.5px; }
+.crossTalkPhoto02 { top: 3349.5px; left: 975px;    width: 97px; }
+.crossTalkPhoto01 { top: 3344.5px; left: 1084.5px; width: 100.5px; }
+
+.crossTalkTitle {
+  position: absolute;
+  top: 3328px;
+  left: 644.5px;
+  width: 350px;
+  transition: opacity 0.25s;
+}
+.crossTalkTitle:hover { opacity: 0.75; }
+.crossTalkTitle img { width: 100%; height: auto; }
+
+.crossTalkText {
+  position: absolute;
+  top: 3446px;
+  left: 656px;
+  width: 331px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 33px;
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+}
+
+.crossTalkSticky { position: absolute; pointer-events: none; }
+.crossTalkStickyLeft  { top: 3483.5px; left: 146px;    width: 261px; }
+.crossTalkStickyRight { top: 3324px;   left: 1231.5px; width: 261px; }
+
+/* ============================================================
+  募集要項 / FAQ ボタン
+============================================================ */
+.entryBtn {
+  position: absolute;
+  top: 3688.6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 21px;
+  width: 531.7px;
+  height: 149.2px;
+  border-radius: 20.6px;
+  background: var(--colorBrand);
+  color: #fff;
+  transition: opacity 0.25s;
+}
+.entryBtn:hover { opacity: 0.85; }
+.entryBtn { padding-bottom: 5px; }
+
+.entryBtnRecruit { left: 240.7px; }
+.entryBtnFaq     { left: 829.8px; }
+
+.entryBtnSub {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+}
+
+.entryBtnMain {
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.15em;
+  text-indent: 0.15em;
+}
+.entryBtnMainFaq { letter-spacing: 0.1em; text-indent: 0.1em; }
+
+/* ============================================================
+  下部トンボ+CMYKストリップ(装飾画像)
+============================================================ */
+.bottomStrip {
+  position: absolute;
+  top: 3885px;
+  left: 0;
+  width: 1597px;
+  pointer-events: none;
+}
+
+/* ============================================================
+  フッター
+============================================================ */
+.footer {
+  position: absolute;
+  top: 3962.4px;
+  left: 1px;
+  width: 1596px;
+  height: 342.5px;
+  border-radius: 2px 2px 44px 44px;
+  background: rgba(90, 204, 249, 0.3);
+}
+
+/* フッター内は footer 左上基準 (page座標 - (1, 3962.4)) */
+.footerLogo {
+  position: absolute;
+  top: 75.6px;  /* y=4038 */
+  left: 160px;  /* x=161 */
+}
+.footerLogo img { width: 206.5px; height: auto; }
+
+.footerLogoEn {
+  display: block;
+  margin-top: 2px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.028em;
+  color: var(--colorBrand);
+}
+
+.footerOfficialBtn {
+  position: absolute;
+  top: 80.6px;  /* y=4043 */
+  left: 415px;  /* x=416 */
+  width: 206px;
+  height: 47px;
+  border-width: 1.5px;
+  border-radius: 10px;
+  font-size: 14px;
+  letter-spacing: 0.4em;
+  text-indent: 0.4em;
+}
+
+.footerAddress {
+  position: absolute;
+  top: 168.6px; /* 1行目 y=4131 */
+  left: 153px;  /* x=154 */
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 23px;
+  letter-spacing: 0.01em;
+}
+.footerAddressIndent { display: inline-block; padding-left: 45px; }
+
+/* ---------- フッターナビ ---------- */
+.footerNavHead {
+  position: absolute;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.15em;
+  color: var(--colorBrand);
+  text-align: center;
+}
+.footerNavHead a {
+  display: block;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--colorBrand);
+  transition: opacity 0.25s;
+}
+.footerNavHead a:hover { opacity: 0.6; }
+
+.footerNavCol1 .footerNavHead { top: 89.6px; left: 688px; width: 177px; }   /* 下線 x689-865 */
+.footerNavCol2 .footerNavHead { top: 89.6px; left: 891px; width: 221px; }   /* 下線 x892-1112 */
+.footerNavCol3 .footerNavHead { top: 89.6px; left: 1143px; width: 145px; }  /* 下線 x1144-1288 */
+.footerNavHeadFaq     { top: 91.6px; left: 1329px; width: 103px; letter-spacing: 0.3em; }
+.footerNavHeadContact { top: 151.6px; left: 1329px; width: 103px; letter-spacing: 0.05em; }
+
+.footerNavList {
+  position: absolute;
+  font-size: 15px;
+  font-weight: 400;
+}
+.footerNavList li { height: 15px; line-height: 15px; margin-bottom: 13px; }
+.footerNavList a { transition: opacity 0.25s; }
+.footerNavList a:hover { opacity: 0.6; }
+
+.footerNavCol1 .footerNavList { top: 139.6px; left: 701px; }  /* y=4102 x=702 */
+.footerNavCol3 .footerNavList { top: 139.6px; left: 1180px; } /* y=4102 x=1181 */
+
+.footerNavSub {
+  position: absolute;
+  top: 139.6px; /* y=4102 */
+  left: 900px;  /* x=901 */
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.footerNavListIndent { top: 166.6px; left: 917px; } /* y=4129 x=918 */
+
+/* ============================================================
+  レスポンシブ対応
+  - 1600px〜 : カンプ等倍
+  - 768〜1599px : PCデザインをJSで等倍縮小(ピクセルパーフェクト維持)
+  - 〜767px : SP専用レイアウト
+============================================================ */
+
+.pageScaler { overflow: hidden; }
+
+/* SP用UI(PCでは非表示) */
+.spHeader, .spDrawer, .isomeScrollNote { display: none; }
+
+@media (min-width: 768px) {
+  body { overflow-x: hidden; min-width: 0; }
+}
+@media (min-width: 1600px) {
+  body { overflow-x: hidden; }
+  .page { margin: 0 auto; }
+}
+
+/* ============================================================
+  SPレイアウト(〜767px)
+============================================================ */
+@media (max-width: 767px) {
+
+  body { min-width: 0; overflow-x: hidden; }
+  .page { width: 100%; height: auto; }
+
+  /* ---- PC専用要素を無効化 ---- */
+  .globalNav,
+  .gridPaper,
+  .trimTop,
+  .bottomStrip,
+  .squiggleBlue,
+  .squiggleYellow,
+  .squigglePink,
+  .pcOnly,
+  .crossTalkCard { display: none; }
+
+  .spOnly { display: block; }
+
+  /* ---- SPヘッダー ---- */
+  .spHeader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+    padding: 0 8px 0 14px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 1px 6px rgba(30, 87, 160, 0.12);
+  }
+  .spHeaderLogo img { width: 132px; height: auto; }
+
+  .spMenuBtn {
+    position: relative;
+    z-index: 120;
+    width: 48px;
+    height: 48px;
+    padding: 14px 11px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+  .spMenuBtnBar {
+    display: block;
+    width: 26px;
+    height: 2px;
+    margin: 0 auto;
+    background: var(--colorBrand);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .spMenuBtnBar + .spMenuBtnBar { margin-top: 7px; }
+
+  body.isDrawerOpen .spMenuBtnBar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+  body.isDrawerOpen .spMenuBtnBar:nth-child(2) { opacity: 0; }
+  body.isDrawerOpen .spMenuBtnBar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+  body.isDrawerOpen { overflow: hidden; }
+
+  /* ---- ドロワーメニュー ---- */
+  .spDrawer {
+    position: fixed;
+    inset: 0;
+    z-index: 110;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    background: rgba(255, 255, 255, 0.97);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+  body.isDrawerOpen .spDrawer { opacity: 1; visibility: visible; }
+
+  .spDrawerList { text-align: center; }
+  .spDrawerList li + li { margin-top: 26px; }
+  .spDrawerList a {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: var(--colorBrand);
+  }
+  .spDrawerOfficialBtn { width: 220px; }
+
+  /* ---- ヒーロー ---- */
+  .hero { position: relative; padding-top: 56px; }
+  .heroVisualSp {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* ---- 方眼紙背景はmain全体へ ---- */
+  main {
+    overflow: hidden;
+    background-color: var(--colorPaper);
+    background-image:
+      repeating-linear-gradient(to right,
+        rgba(90, 204, 249, 0.085) 0 1px, transparent 1px 24px),
+      repeating-linear-gradient(to bottom,
+        rgba(90, 204, 249, 0.085) 0 1px, transparent 1px 24px);
+  }
+
+  /* ---- セクション共通 ---- */
+  section { position: relative; scroll-margin-top: 64px; }
+
+  /* PCの絶対配置座標(top/left等)を一括リセット */
+  .sectionTitle,
+  .aboutPhoto,
+  .aboutCard,
+  .aboutCardTitle,
+  .aboutCardText,
+  .pillBtn,
+  .companyBtn,
+  .knowBtn,
+  .isomeIllust,
+  .memberItem,
+  .crossTalk,
+  .crossTalkTitle,
+  .crossTalkText,
+  .crossTalkPhoto,
+  .entryBtn,
+  .footerLogo,
+  .footerOfficialBtn,
+  .footerAddress,
+  .footerNavHead,
+  .footerNavList,
+  .footerNavSub {
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+  }
+
+  .sectionTitle {
+    position: static;
+    font-size: 30px;
+    margin: 0 20px 22px;
+  }
+
+  /* ---- About ---- */
+  .about { padding: 46px 0 56px; }
+
+  /* 水色アーチ(装飾) */
+  .about::before {
+    content: "";
+    position: absolute;
+    top: 18px;
+    left: -12%;
+    width: 88%;
+    max-width: 420px;
+    aspect-ratio: 1688 / 522;
+    background: url(../images/squiggleBlue.png) left top / cover no-repeat;
+    pointer-events: none;
+  }
+  .about > * { position: relative; }
+
+  .aboutPhoto {
+    position: relative;
+    width: calc(100% - 30px);
+    max-width: 470px;
+    aspect-ratio: 804 / 629;
+    margin: 0;
+  }
+  .aboutPhotoLabel {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+  }
+
+  .aboutCard {
+    position: relative;
+    width: auto;
+    height: auto;
+    max-width: 520px;
+    margin: -44px 14px 0 30px;
+    padding: 26px 20px 30px;
+  }
+  .aboutCardTitle {
+    position: static;
+    font-size: 19px;
+    letter-spacing: 0.06em;
+  }
+  .aboutCardText {
+    position: static;
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 29px;
+    letter-spacing: 0.06em;
+  }
+  .aboutCardTextSecond { margin-top: 16px; }
+  .aboutCardText br { display: none; } /* SPは自然折返し */
+
+  /* ---- ピルボタン(SP共通) ---- */
+  .pillBtn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 272px;
+    height: 58px;
+    margin: 30px auto 0;
+    border-radius: 29px;
+  }
+  .pillBtn::before { left: 26px; }
+  .pillBtnLabel {
+    position: static;
+    transform: none;
+    font-size: 16px;
+  }
+  .companyBtn, .knowBtn {
+    top: auto;
+    left: auto;
+    width: 272px;
+  }
+  .companyBtn .pillBtnLabel,
+  .knowBtn .pillBtnLabel { left: auto; margin-left: -28px; }
+  .companyBtnIcon {
+    top: auto;
+    left: auto;
+    right: 12px;
+    bottom: 5px;
+    width: 78px;
+  }
+
+  /* ---- Work process ---- */
+  .work { padding: 50px 0 56px; }
+
+  .work::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: -60px;
+    width: 250px;
+    aspect-ratio: 749 / 461;
+    background: url(../images/squiggleYellow.png) left top / cover no-repeat;
+    pointer-events: none;
+  }
+  .work > * { position: relative; }
+
+  .isomeScroller {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 16px;
+  }
+  .isomeIllust {
+    position: static;
+    width: 720px;
+    max-width: none;
+    height: auto;
+  }
+  .isomeScrollNote {
+    display: block;
+    margin-top: 8px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: #8b8b86;
+  }
+
+  /* ---- Interview ---- */
+  .interview { padding: 50px 0 60px; }
+
+  .memberList {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 16px 18px;
+    scroll-snap-type: x mandatory;
+    background: url(../images/squigglePink.png) center / 170% auto no-repeat;
+  }
+  .memberItem {
+    position: static;
+    flex: 0 0 auto;
+    width: auto;
+    scroll-snap-align: center;
+  }
+  .memberItem img { width: auto; height: 235px; }
+
+  /* ---- 若手座談会 ---- */
+  .crossTalk {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px 6px;
+    max-width: 520px;
+    margin: 52px 18px 0;
+    padding: 40px 14px 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 2px 5px 14px rgba(0, 0, 0, 0.16);
+    transform: rotate(-0.8deg);
+  }
+  @media (min-width: 560px) {
+    .crossTalk { margin-left: auto; margin-right: auto; }
+  }
+
+  .crossTalkPaperclip {
+    position: absolute;
+    top: -28px;
+    left: 8px;
+    width: 54px;
+    height: auto;
+  }
+  .crossTalkTitle {
+    position: static;
+    grid-row: 1;
+    grid-column: 1 / -1;
+    width: min(250px, 82%);
+    margin: 0 auto;
+  }
+  .crossTalkText {
+    position: static;
+    grid-row: 2;
+    grid-column: 1 / -1;
+    width: auto;
+    margin: 2px 0 4px;
+    font-size: 14px;
+    line-height: 26px;
+  }
+  .crossTalkPhoto {
+    position: static;
+    align-self: end;
+    justify-self: center;
+    width: 100%;
+    max-width: 62px;
+    height: auto;
+  }
+  .crossTalkPhoto04 { grid-row: 3; grid-column: 1; }
+  .crossTalkPhoto03 { grid-row: 3; grid-column: 2; }
+  .crossTalkPhoto02 { grid-row: 3; grid-column: 3; }
+  .crossTalkPhoto01 { grid-row: 3; grid-column: 4; }
+
+  .crossTalkStickyLeft {
+    top: auto;
+    bottom: -24px;
+    left: -12px;
+    width: 168px;
+    height: auto;
+    transform: rotate(-3deg);
+  }
+  .crossTalkStickyRight {
+    top: -20px;
+    left: auto;
+    right: -12px;
+    width: 168px;
+    height: auto;
+    transform: rotate(2deg);
+  }
+
+  /* ---- 募集要項 / FAQ ---- */
+  .entry { padding: 54px 16px 60px; }
+  .entryBtn {
+    position: static;
+    width: 100%;
+    max-width: 480px;
+    height: 108px;
+    margin: 0 auto;
+    padding-bottom: 0;
+    gap: 14px;
+    border-radius: 16px;
+  }
+  .entryBtnRecruit { margin-bottom: 16px; }
+  .entryBtnSub { font-size: 12px; }
+  .entryBtnMain { font-size: 19px; }
+
+  /* ---- フッター ---- */
+  .footer {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 38px 24px 44px;
+    border-radius: 26px 26px 0 0;
+  }
+
+  .footerLogo { position: static; }
+  .footerLogo img { width: 168px; }
+  .footerLogoEn { font-size: 13px; }
+
+  .footerOfficialBtn {
+    position: static;
+    margin: 18px 0 20px;
+  }
+
+  .footerAddress {
+    position: static;
+    font-size: 13px;
+    line-height: 22px;
+  }
+  .footerAddressIndent { padding-left: 0; }
+
+  .footerNav {
+    display: grid;
+    gap: 28px;
+    margin-top: 30px;
+  }
+
+  .footerNavHead {
+    position: static;
+    width: auto;
+    text-align: left;
+    font-size: 17px;
+  }
+  .footerNavHead a {
+    display: inline-block;
+    padding: 0 6px 8px 0;
+  }
+
+  .footerNavList {
+    position: static;
+    margin-top: 14px;
+    font-size: 14px;
+  }
+  .footerNavList li {
+    height: auto;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .footerNavSub {
+    position: static;
+    margin-top: 12px;
+    font-size: 12px;
+  }
+  .footerNavListIndent { padding-left: 14px; }
+
+  .footerNavCol4 {
+    display: flex;
+    gap: 36px;
+  }
+  .footerNavHeadFaq,
+  .footerNavHeadContact { letter-spacing: 0.15em; }
+}
+
+/* ============================================================
+  ワークフロー ホットスポット(部署ラベルのリンク化)
+============================================================ */
+/* PC:イラスト上のラベルへ透明の当たり判定を重ねる */
+.workSpot {
+  position: absolute;
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: transparent; /* ラベル文字はイラスト側に描画済み */
+  font: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+.workSpot:hover,
+.workSpot:focus-visible {
+  background: rgba(90, 204, 249, 0.2);
+  box-shadow: 0 0 0 2.5px rgba(30, 87, 160, 0.55);
+  outline: none;
+}
+
+.workSpotEigyo   { top: 2028px; left: 384px;  width: 122px; height: 134px; }
+.workSpotSeisaku { top: 1898px; left: 618px;  width: 128px; height: 124px; }
+.workSpotInsatsu { top: 2023px; left: 983px;  width: 118px; height: 124px; }
+.workSpotKako    { top: 2348px; left: 873px;  width: 224px; height: 118px; }
+.workSpotSoumu   { top: 2452px; left: 313px;  width: 112px; height: 118px; }
+.workSpotDekita  { top: 2502px; left: 823px;  width: 238px; height: 94px; }
+
+/* ============================================================
+  全画面モーダル
+============================================================ */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 28px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s, visibility 0.25s;
+}
+.modal.isOpen { opacity: 1; visibility: visible; }
+body.isModalOpen { overflow: hidden; }
+
+.modalOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 28, 56, 0.74);
+  cursor: pointer;
+}
+
+.modalBody {
+  position: relative;
+  margin: 0;
+  max-width: min(1200px, 94vw);
+}
+
+.modalImage {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 150px);
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 12px 44px rgba(0, 0, 0, 0.45);
+}
+
+.modalCaption {
+  margin-top: 14px;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-indent: 0.18em;
+}
+
+.modalClose {
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  z-index: 1;
+  width: 46px;
+  height: 46px;
+  border: 1.5px solid var(--colorBrand);
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.modalClose::before,
+.modalClose::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 2px;
+  background: var(--colorBrand);
+}
+.modalClose::before { transform: translate(-50%, -50%) rotate(45deg); }
+.modalClose::after  { transform: translate(-50%, -50%) rotate(-45deg); }
+.modalClose:hover { background: #e9f5fd; }
+
+/* ---- SP:ラベルはタップしづらいためイラスト下にリンクを並べる ---- */
+@media (max-width: 767px) {
+  .workSpotList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 18px 16px 0;
+  }
+  .workSpot {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 9px 17px;
+    border: 1px solid var(--colorBrand);
+    border-radius: 20px;
+    background: #fff;
+    color: var(--colorBrand);
+    font-family: var(--fontGothic);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+  .workSpot:hover,
+  .workSpot:focus-visible {
+    background: var(--colorBrand);
+    color: #fff;
+    box-shadow: none;
+  }
+  .workSpotNum { margin-right: 5px; font-size: 12px; }
+
+  .modal { padding: 16px; }
+  .modalBody { max-width: 100%; }
+  .modalImage { max-height: calc(100vh - 130px); }
+  .modalCaption { font-size: 14px; }
+  .modalClose { top: -14px; right: -4px; width: 42px; height: 42px; }
+}
