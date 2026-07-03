@@ -150,7 +150,7 @@ body {
   position: absolute;
   top: 879.3px;
   left: 58.3px;
-  right: calc((1600px - 100vw) / 2);
+  right: 0; /* 768〜1599px は .page を等倍縮小(transform-origin: top left)でフィットさせているため、右端は0でカンプ右端=画面右端に一致 */
   height: 3027px;
   background-color: var(--colorPaper);
   background-image:
@@ -543,6 +543,8 @@ body {
 @media (min-width: 1600px) {
   body { overflow-x: hidden; }
   .page { margin: 0 auto; }
+  /* 1600px以上は縮小なしで中央寄せなので、右端をビューポート右端まで伸ばす */
+  .gridPaper { right: calc((1600px - 100vw) / 2); }
 }
 
 /* ============================================================
