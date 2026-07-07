@@ -1,8 +1,10 @@
 @charset "UTF-8";
 /* ============================================================
-  株式会社須田製版 採用サイト TOP
+  株式会社須田製版 採用サイト TOP — サイト固有スタイル
   デザインカンプ基準幅：1600px / 高さ：4305px
-  ※ カンプ由来の絶対配置コーディングです(詳細は README.md)
+  ※ カンプ由来の px 座標コーディングです(詳細は README.md)
+  ※ 読み込み順: css/layout.css → css/common.css → 本ファイル
+    (リセット・共通パーツは layout.css、汎用ユーティリティは common.css)
 ============================================================ */
 
 /* ---------- 変数 ---------- */
@@ -17,11 +19,19 @@
   --fontMaru: "Zen Maru Gothic", "Zen Kaku Gothic New", sans-serif;
 }
 
-/* ---------- リセット ---------- */
+/* ---------- リセット(layout.css/common.css の共通指定をサイト仕様へ調整) ---------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-img { display: block; }
+/* common.css の img { max-width:100%; width:auto; height:auto } はカンプ外へはみ出す
+   グネグネ模様(幅4088px等)の縮小や、HTML属性で指定した高さの打ち消しを起こすため無効化。
+   高さはこのファイル内で各画像クラスに明示指定して元のレンダリングを維持する */
+img { display: block; max-width: none; }
 ul, li { list-style: none; }
 a { text-decoration: none; color: inherit; }
+/* layout.css の p/li/a 等への font-size:1.4rem / line-height:1.5 指定を継承値へ戻す
+   (本サイトは px 指定でタイポグラフィを組んでいるため) */
+p, li, a, dt, dd { font-size: inherit; line-height: inherit; }
+/* layout.css の a:hover { opacity:0.5 } を無効化(ホバー演出は要素ごとに個別指定) */
+a:hover { opacity: 1; }
 
 html { scroll-behavior: smooth; }
 
@@ -43,43 +53,78 @@ body {
 
 /* ============================================================
   ヒーロー / グローバルナビ
+  重なり合うレイヤーは grid スタック(全子要素を grid-area 1/1 に重ね、
+  px マージンで位置決め)で構成。描画順は DOM 順のまま維持される
 ============================================================ */
-.heroSky,
-.heroVisual {
+.hero {
+  /* 大枠のアンカーのみ絶対配置(768〜1599pxのtransform縮小時に
+     ラスタライズ結果を従来と完全一致させるため)。内部レイアウトは grid */
   position: absolute;
   top: 0;
   left: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  width: 1600px;
+  height: 843px;
+}
+/* minmax(0,1fr) + min-width/height:0 で、大きなマージンを持つ子が
+   グリッドトラックを押し広げるのを防ぐ(絶対配置と同じ独立配置になる)。
+   position:relative(オフセットなし)は描画フェーズを従来の絶対配置時と
+   同じ「positioned」に保ち、transform縮小時のラスタライズ差を防ぐため */
+.hero > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+  justify-self: start;
+  align-self: start;
+  position: relative;
+}
+
+.heroSky,
+.heroVisual {
   width: 1600px;
   height: 843px;
 }
 
-.heroSquiggle { position: absolute; pointer-events: none; }
-.squiggleHeroPink   { top: -19px;  left: 83.5px;   width: 857px; }
-.squiggleHeroYellow { top: 506px;  left: -1201px;  width: 1977px; }
-.squiggleHeroCyan   { top: 506px;  left: 855px;    width: 2231.5px; }
+.heroSquiggle { pointer-events: none; }
+.squiggleHeroPink   { margin: -19px 0 0 83.5px;   width: 857px;    height: 475px; }
+.squiggleHeroYellow { margin: 506px 0 0 -1201px;  width: 1977px;   height: 328px; }
+.squiggleHeroCyan   { margin: 506px 0 0 855px;    width: 2231.5px; height: 309px; }
 
 .spOnly { display: none; }
+/* layout.css は max-width:768px で .pcOnly を隠すが、本サイトのPC境界は768px以上。
+   768px ちょうどで PC 要素が消えないよう明示する */
+@media (min-width: 768px) {
+  .pcOnly { display: block; }
+}
 
 .trimTop {
-  position: absolute;
-  top: 1.5px;
-  left: 0;
-  width: 1597px;
+  margin: 1.5px 0 0;
+  width: 1597px; height: 81px;
   pointer-events: none;
 }
 
+/* ナビ本体もヒーローの grid スタック上に置き、内部も grid スタックで組む */
 .globalNav {
-  position: absolute;
-  top: 0;
-  left: 1296px;
+  margin-left: 1296px;
   width: 304px;
   height: 843px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+.globalNav > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+  justify-self: start;
+  align-self: start;
+  position: relative;
 }
 
 .siteLogo {
-  position: absolute;
-  top: 78px;
-  left: 39px; /* page基準 1335px */
+  margin: 78px 0 0 39px; /* page基準 x=1335px */
 }
 .siteLogo img { width: 206.5px; height: auto; }
 
@@ -95,9 +140,8 @@ body {
 }
 
 .globalNavList {
-  position: absolute;
-  top: 197px;
-  right: 60px; /* テキスト右端 x=1540 */
+  justify-self: end;
+  margin: 197px 60px 0 0; /* テキスト右端 x=1540 */
   display: flex;
   flex-direction: column;
   gap: 42px;
@@ -137,10 +181,8 @@ body {
   color: #fff;
 }
 
-.officialSiteBtn {
-  position: absolute;
-  top: 514px;
-  left: 44px; /* page基準 1340px */
+.globalNav .officialSiteBtn {
+  margin: 514px 0 0 44px; /* page基準 1340px */
 }
 
 /* ============================================================
@@ -161,15 +203,14 @@ body {
   background-position: 34.9px 14.4px;
 }
 
-.squiggleBlue   { position: absolute; top: 920.5px; left: -1207px;   width: 4088px; pointer-events: none; }
-.squiggleYellow { position: absolute; top: 1664px;   left: -1199.5px; width: 1949px; pointer-events: none; }
-.squigglePink   { position: absolute; top: 2706px;   left: -1200.5px; width: 3999px; pointer-events: none; }
+.squiggleBlue   { position: absolute; top: 920.5px; left: -1207px;   width: 4088px; height: 522px; pointer-events: none; }
+.squiggleYellow { position: absolute; top: 1664px;   left: -1199.5px; width: 1949px; height: 461px; pointer-events: none; }
+.squigglePink   { position: absolute; top: 2706px;   left: -1200.5px; width: 3999px; height: 548px; pointer-events: none; }
 
 /* ============================================================
-  セクションタイトル共通
+  セクションタイトル共通(各セクションの grid スタック上に配置)
 ============================================================ */
 .sectionTitle {
-  position: absolute;
   font-family: var(--fontMaru);
   font-size: 43px;
   font-weight: 400;
@@ -180,14 +221,31 @@ body {
 
 /* ============================================================
   About us
+  セクションの大枠のみ絶対アンカー、内部は grid スタック
 ============================================================ */
-.aboutTitle { top: 950px; left: 312px; }
+.about {
+  position: absolute;
+  top: 950px;
+  left: 0;
+  width: 1600px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+.about > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+  justify-self: start;
+  align-self: start;
+  position: relative;
+}
+
+.aboutTitle { margin-left: 312px; }
 
 /* 写真プレースホルダー(実写真に差し替え前提) */
 .aboutPhoto {
-  position: absolute;
-  top: 1058.6px;
-  left: -14px;
+  margin: 108.6px 0 0 -14px; /* page基準 y=1058.6 x=-14 */
   width: 804.3px;
   height: 628.7px;
   background:
@@ -207,19 +265,26 @@ body {
 }
 
 .aboutCard {
-  position: absolute;
-  top: 985.1px;
-  left: 747.9px;
+  margin: 35.1px 0 0 747.9px; /* page基準 y=985.1 x=747.9 */
   width: 750.8px;
   height: 613.6px;
   background: #fff;
   z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+.aboutCard > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+  justify-self: start;
+  align-self: start;
+  position: relative;
 }
 
 .aboutCardTitle {
-  position: absolute;
-  top: 72px;   /* page基準 y=1057 */
-  left: 97px; /* page基準 x=845 */
+  margin: 72px 0 0 97px; /* page基準 y=1057 x=845 */
   font-size: 28px;
   font-weight: 500;
   line-height: 1;
@@ -227,22 +292,20 @@ body {
 }
 
 .aboutCardText {
-  position: absolute;
-  top: 142px; /* 1行目テキスト上端 y=1137 (行高分オフセット) */
-  left: 101px;
+  margin: 142px 0 0 101px; /* 1行目テキスト上端 y=1137 (行高分オフセット) */
   font-size: 15px;
   font-weight: 400;
   line-height: 35px;
   letter-spacing: 0.085em;
 }
 
-.aboutCardTextSecond { top: 422px; } /* 空行1行分を挟んだ2段落目 */
+.aboutCardTextSecond { margin-top: 422px; } /* 空行1行分を挟んだ2段落目 */
 
 /* ============================================================
   ピル型ボタン共通(私たちの会社 / 仕事・人を知る)
 ============================================================ */
 .pillBtn {
-  position: absolute;
+  /* grid スタックの子として配置(relative は内部の絶対配置ラベル/アイコンの基準) */
   display: block;
   height: 67.9px;
   border-radius: 34px;
@@ -275,8 +338,7 @@ body {
 }
 
 .companyBtn {
-  top: 1618.7px;
-  left: 1071.4px;
+  margin: 668.7px 0 0 1071.4px; /* page基準 y=1618.7 x=1071.4 */
   width: 428.9px;
 }
 .companyBtn .pillBtnLabel { left: 86px; }
@@ -286,70 +348,130 @@ body {
   top: 6px;    /* page基準 y=1625 */
   left: 247px; /* page基準 x=1318.5 */
   width: 141px;
+  height: 63px;
   pointer-events: none;
 }
 
 .knowBtn {
-  top: 2518.4px;
-  left: 1181.1px;
+  margin: 699.9px 0 0 1181.1px; /* page基準 y=2518.4 x=1181.1 */
   width: 319.2px;
 }
 .knowBtn .pillBtnLabel { left: 88px; letter-spacing: 0.06em; }
 
 /* ============================================================
   Work process
+  セクションの大枠のみ絶対アンカー、内部は grid スタック
 ============================================================ */
-.workTitle { top: 1827px; left: 313px; }
-
-.isomeIllust {
+.work {
   position: absolute;
-  top: 1818.5px;
-  left: 114px;
+  top: 1818.5px; /* イラスト上端が基準 */
+  left: 0;
+  width: 1600px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+.work > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+  justify-self: start;
+  align-self: start;
+  position: relative;
+}
+/* ホットスポットの ul/li は箱を作らず、ボタンを .work の grid 子として直接置く。
+   :where() で詳細度を抑え、SP側の .workSpotList { display:flex } が勝てるようにする */
+.work > :where(.workSpotList),
+.workSpotList > :where(li) { display: contents; }
+
+.workTitle { margin: 8.5px 0 0 313px; /* page基準 y=1827 x=313 */ }
+
+.isomeScroller { margin-left: 114px; }
+.isomeIllust {
   width: 1408.5px;
+  height: 879px;
 }
 
 /* ============================================================
   Interview
+  セクションの大枠のみ絶対アンカー、社員写真は flex 横並び
 ============================================================ */
-.interviewTitle { top: 2694px; left: 315px; }
+.interview {
+  position: absolute;
+  top: 2694px;
+  left: 0;
+  width: 1600px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+.interview > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+  justify-self: start;
+  align-self: start;
+  position: relative;
+}
 
-.memberItem { position: absolute; }
+.interviewTitle { margin-left: 315px; /* page基準 y=2694 x=315 */ }
+
+/* 写真5枚は等間隔(2px)の flex 行。上下の互い違いは margin-top で表現 */
+.memberList {
+  margin: 107.5px 0 0 17px; /* 上段写真の上端 y=2801.5 / 左端 x=17 */
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+}
+.memberItem { position: relative; }
 .memberItem img { width: 100%; height: auto; transition: transform 0.3s; }
 .memberItem a:hover img { transform: scale(1.04); }
 
-.memberMiura  { top: 2802px;   left: 17px;     width: 313.5px; }
-.memberKojima { top: 2876px;   left: 332.5px;  width: 313.5px; }
-.memberTakada { top: 2801.5px; left: 648px;    width: 317.5px; }
-.memberIrie   { top: 2871px;   left: 967.5px;  width: 313.5px; }
-.memberChida  { top: 2801.5px; left: 1283px; width: 317px; }
+.memberMiura  { margin-top: 0.5px;  width: 313.5px; }
+.memberKojima { margin-top: 74.5px; width: 313.5px; }
+.memberTakada { width: 317.5px; }
+.memberIrie   { margin-top: 69.5px; width: 313.5px; }
+.memberChida  { width: 317px; }
 
-/* ---------- 若手座談会 ---------- */
+/* ---------- 若手座談会(コラージュを grid スタックで重ねる) ---------- */
+/* 原点 = ペーパークリップ上端 y=3266 / 左付箋左端 x=146 (interview基準 y=572) */
+.crossTalk {
+  margin: 572px 0 0 146px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+.crossTalk > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+  justify-self: start;
+  align-self: start;
+  position: relative;
+}
+
 .crossTalkCard {
-  position: absolute;
-  top: 3295.5px;
-  left: 413.5px;
+  margin: 29.5px 0 0 267.5px; /* page基準 y=3295.5 x=413.5 */
   width: 802px;
+  height: 280px;
   pointer-events: none;
 }
 
 .crossTalkPaperclip {
-  position: absolute;
-  top: 3266px;
-  left: 370px;
+  margin-left: 224px; /* page基準 y=3266 x=370 */
   width: 121px;
+  height: 149px;
   pointer-events: none;
 }
 
-.crossTalkPhoto { position: absolute; pointer-events: none; }
-.crossTalkPhoto04 { top: 3356.5px; left: 436px;    width: 101.5px; }
-.crossTalkPhoto03 { top: 3368px;   left: 546px;    width: 106.5px; }
-.crossTalkPhoto02 { top: 3349.5px; left: 975px;    width: 97px; }
-.crossTalkPhoto01 { top: 3344.5px; left: 1084.5px; width: 100.5px; }
+.crossTalkPhoto { pointer-events: none; }
+.crossTalkPhoto04 { margin: 90.5px 0 0 290px;   width: 101.5px; height: 212px; } /* y=3356.5 x=436 */
+.crossTalkPhoto03 { margin: 102px 0 0 400px;    width: 106.5px; height: 198px; } /* y=3368 x=546 */
+.crossTalkPhoto02 { margin: 83.5px 0 0 829px;   width: 97px;   height: 205px; } /* y=3349.5 x=975 */
+.crossTalkPhoto01 { margin: 78.5px 0 0 938.5px; width: 100.5px; height: 208px; } /* y=3344.5 x=1084.5 */
 
 .crossTalkTitle {
-  position: absolute;
-  top: 3328px;
-  left: 644.5px;
+  margin: 62px 0 0 498.5px; /* page基準 y=3328 x=644.5 */
   width: 350px;
   transition: opacity 0.25s;
 }
@@ -357,9 +479,7 @@ body {
 .crossTalkTitle img { width: 100%; height: auto; }
 
 .crossTalkText {
-  position: absolute;
-  top: 3446px;
-  left: 656px;
+  margin: 180px 0 0 510px; /* page基準 y=3446 x=656 */
   width: 331px;
   text-align: center;
   font-size: 17px;
@@ -369,16 +489,35 @@ body {
   text-indent: 0.2em;
 }
 
-.crossTalkSticky { position: absolute; pointer-events: none; }
-.crossTalkStickyLeft  { top: 3483.5px; left: 146px;    width: 261px; }
-.crossTalkStickyRight { top: 3324px;   left: 1231.5px; width: 261px; }
+.crossTalkSticky { pointer-events: none; }
+.crossTalkStickyLeft  { margin-top: 217.5px;            width: 261px; height: 72px; } /* y=3483.5 x=146 */
+.crossTalkStickyRight { margin: 58px 0 0 1085.5px;      width: 261px; height: 71px; } /* y=3324 x=1231.5 */
 
 /* ============================================================
-  募集要項 / FAQ ボタン
+  募集要項 / FAQ ボタン(2つ並びは flex 行)
 ============================================================ */
-.entryBtn {
+.entry {
+  /* flex+gap だと小数幅の累積で右ボタンが 1/64px 単位でずれるため、
+     grid スタックで左右それぞれを独立配置する */
   position: absolute;
   top: 3688.6px;
+  left: 0;
+  width: 1600px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+.entry > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+  justify-self: start;
+  align-self: start;
+}
+.entryBtnRecruit { margin-left: 240.7px; }
+.entryBtnFaq     { margin-left: 829.8px; }
+.entryBtn {
+  position: relative; /* 描画フェーズを従来と揃える */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -393,9 +532,6 @@ body {
 }
 .entryBtn:hover { opacity: 0.85; }
 .entryBtn { padding-bottom: 5px; }
-
-.entryBtnRecruit { left: 240.7px; }
-.entryBtnFaq     { left: 829.8px; }
 
 .entryBtnSub {
   font-size: 14px;
@@ -422,11 +558,13 @@ body {
   top: 3885px;
   left: 0;
   width: 1597px;
+  height: 81px;
   pointer-events: none;
 }
 
 /* ============================================================
   フッター
+  外枠のみ絶対アンカー。ブランド部は grid スタック、ナビは flex 4カラム
 ============================================================ */
 .footer {
   position: absolute;
@@ -436,14 +574,37 @@ body {
   height: 342.5px;
   border-radius: 2px 2px 44px 44px;
   background: rgba(90, 204, 249, 0.3);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+.footer > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+  justify-self: start;
+  align-self: start;
+  position: relative;
 }
 
-/* フッター内は footer 左上基準 (page座標 - (1, 3962.4)) */
-.footerLogo {
-  position: absolute;
-  top: 75.6px;  /* y=4038 */
-  left: 160px;  /* x=161 */
+/* ---------- ブランド部(ロゴ/公式サイトボタン/住所) ---------- */
+/* 原点 = footer 左上から (75.6, 153) */
+.footerBrand {
+  margin: 75.6px 0 0 153px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
 }
+.footerBrand > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+  justify-self: start;
+  align-self: start;
+  position: relative;
+}
+
+.footerLogo { margin-left: 7px; /* page基準 x=161 y=4038 */ }
 .footerLogo img { width: 206.5px; height: auto; }
 
 .footerLogoEn {
@@ -456,9 +617,7 @@ body {
 }
 
 .footerOfficialBtn {
-  position: absolute;
-  top: 80.6px;  /* y=4043 */
-  left: 415px;  /* x=416 */
+  margin: 5px 0 0 262px; /* page基準 x=416 y=4043 */
   width: 206px;
   height: 47px;
   border-width: 1.5px;
@@ -469,9 +628,7 @@ body {
 }
 
 .footerAddress {
-  position: absolute;
-  top: 168.6px; /* 1行目 y=4131 */
-  left: 153px;  /* x=154 */
+  margin-top: 93px; /* 1行目 page基準 y=4131 x=154 */
   font-size: 15px;
   font-weight: 400;
   line-height: 23px;
@@ -479,9 +636,19 @@ body {
 }
 .footerAddressIndent { display: inline-block; padding-left: 45px; }
 
-/* ---------- フッターナビ ---------- */
+/* ---------- フッターナビ(flex 4カラム) ---------- */
+.footerNav {
+  margin: 89.6px 0 0 688px;
+  display: flex;
+  align-items: flex-start;
+}
+/* カラム幅と間隔(下線 x689-865 / x892-1112 / x1144-1288 / x1330-1432) */
+.footerNavCol1 { width: 177px; }
+.footerNavCol2 { width: 221px; margin-left: 26px; }
+.footerNavCol3 { width: 145px; margin-left: 31px; }
+.footerNavCol4 { width: 103px; margin-left: 41px; margin-top: 2px; }
+
 .footerNavHead {
-  position: absolute;
   font-size: 20px;
   font-weight: 500;
   line-height: 1;
@@ -497,14 +664,10 @@ body {
 }
 .footerNavHead a:hover { opacity: 0.6; }
 
-.footerNavCol1 .footerNavHead { top: 89.6px; left: 688px; width: 177px; }   /* 下線 x689-865 */
-.footerNavCol2 .footerNavHead { top: 89.6px; left: 891px; width: 221px; }   /* 下線 x892-1112 */
-.footerNavCol3 .footerNavHead { top: 89.6px; left: 1143px; width: 145px; }  /* 下線 x1144-1288 */
-.footerNavHeadFaq     { top: 91.6px; left: 1329px; width: 103px; letter-spacing: 0.3em; }
-.footerNavHeadContact { top: 151.6px; left: 1329px; width: 103px; letter-spacing: 0.05em; }
+.footerNavHeadFaq     { letter-spacing: 0.3em; }
+.footerNavHeadContact { margin-top: 26px; letter-spacing: 0.05em; }
 
 .footerNavList {
-  position: absolute;
   font-size: 15px;
   font-weight: 400;
 }
@@ -512,20 +675,20 @@ body {
 .footerNavList a { transition: opacity 0.25s; }
 .footerNavList a:hover { opacity: 0.6; }
 
-.footerNavCol1 .footerNavList { top: 139.6px; left: 701px; }  /* y=4102 x=702 */
-.footerNavCol3 .footerNavList { top: 139.6px; left: 1180px; } /* y=4102 x=1181 */
+/* 見出し(高さ34px)の下 y=139.6 に各リストを配置
+   (:where で詳細度を抑え、SP側の .footerNavList のマージン指定が勝てるようにする) */
+:where(.footerNavCol1) .footerNavList { margin: 16px 0 0 13px; }  /* y=4102 x=702 */
+:where(.footerNavCol3) .footerNavList { margin: 16px 0 0 37px; }  /* y=4102 x=1181 */
 
 .footerNavSub {
-  position: absolute;
-  top: 139.6px; /* y=4102 */
-  left: 900px;  /* x=901 */
+  margin: 16px 0 0 9px; /* y=4102 x=901 */
   font-size: 13px;
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0.04em;
 }
 
-.footerNavListIndent { top: 166.6px; left: 917px; } /* y=4129 x=918 */
+.footerNavListIndent { margin: 14px 0 0 26px; } /* y=4129 x=918 */
 
 /* ============================================================
   レスポンシブ対応
@@ -637,10 +800,13 @@ body {
     letter-spacing: 0.22em;
     color: var(--colorBrand);
   }
-  .spDrawerOfficialBtn { width: 220px; }
+  /* 従来はベースの .officialSiteBtn { position:absolute; top:514px; left:44px } が
+     ドロワー内ボタンにも適用されていた。ベースを .globalNav にスコープしたため、
+     ドロワー内の見た目を維持する目的で同じ配置をここで明示する */
+  .spDrawerOfficialBtn { width: 220px; position: absolute; top: 514px; left: 44px; }
 
   /* ---- ヒーロー ---- */
-  .hero { position: relative; padding-top: 56px; }
+  .hero { position: relative; padding-top: 56px; display: block; width: auto; height: auto; }
   .heroVisualSp {
     display: block;
     width: 100%;
@@ -660,6 +826,41 @@ body {
 
   /* ---- セクション共通 ---- */
   section { position: relative; scroll-margin-top: 64px; }
+
+  /* PC(grid/flexスタック)レイアウトの一括リセット
+     (base側が .about 等のクラスで position:absolute を持つため、
+      element セレクタの section{position:relative} では勝てない) */
+  .about, .work, .interview, .entry {
+    position: relative;
+    display: block;
+    top: auto;
+    left: auto;
+    width: auto;
+  }
+  /* PC(gridスタック)の justify-self/align-self をリセット。
+     ブロックレイアウトでも justify-self が適用される(CSS Box Alignment)ため、
+     残っているとSPのブロック子要素が shrink-to-fit に縮んでしまう */
+  .hero > *,
+  .about > *,
+  .work > *,
+  .interview > *,
+  .entry > *,
+  .aboutCard > *,
+  .crossTalk > * {
+    justify-self: auto;
+    align-self: auto;
+  }
+
+  /* PCでは px マージンで位置決めしている要素のマージンをリセット
+     (SP側で個別のマージン指定がないもの) */
+  .aboutCardTitle,
+  .isomeScroller,
+  .workSpot,
+  .memberList,
+  .memberItem,
+  .crossTalkPaperclip,
+  .crossTalkPhoto,
+  .crossTalkSticky { margin: 0; }
 
   /* PCの絶対配置座標(top/left等)を一括リセット */
   .sectionTitle,
@@ -707,7 +908,7 @@ body {
     width: 88%;
     max-width: 420px;
     aspect-ratio: 1688 / 522;
-    background: url(../images/squiggleBlue.png) left top / cover no-repeat;
+    background: url(images/squiggleBlue.png) left top / cover no-repeat;
     pointer-events: none;
   }
   .about > * { position: relative; }
@@ -728,6 +929,7 @@ body {
 
   .aboutCard {
     position: relative;
+    display: block;
     width: auto;
     height: auto;
     max-width: 520px;
@@ -741,7 +943,7 @@ body {
   }
   .aboutCardText {
     position: static;
-    margin-top: 20px;
+    margin: 20px 0 0;
     font-size: 14px;
     line-height: 29px;
     letter-spacing: 0.06em;
@@ -791,7 +993,7 @@ body {
     left: -60px;
     width: 250px;
     aspect-ratio: 749 / 461;
-    background: url(../images/squiggleYellow.png) left top / cover no-repeat;
+    background: url(images/squiggleYellow.png) left top / cover no-repeat;
     pointer-events: none;
   }
   .work > * { position: relative; }
@@ -826,7 +1028,7 @@ body {
     -webkit-overflow-scrolling: touch;
     padding: 10px 16px 18px;
     scroll-snap-type: x mandatory;
-    background: url(../images/squigglePink.png) center / 170% auto no-repeat;
+    background: url(images/squigglePink.png) center / 170% auto no-repeat;
   }
   .memberItem {
     position: static;
@@ -841,6 +1043,7 @@ body {
     position: relative;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
     gap: 10px 6px;
     max-width: 520px;
     margin: 52px 18px 0;
@@ -856,6 +1059,7 @@ body {
 
   .crossTalkPaperclip {
     position: absolute;
+    grid-area: auto; /* grid-area:1/1 のままだと絶対配置の基準がグリッドエリアになるため解除 */
     top: -28px;
     left: 8px;
     width: 54px;
@@ -872,6 +1076,7 @@ body {
     position: static;
     grid-row: 2;
     grid-column: 1 / -1;
+    justify-self: stretch; /* PCのjustify-self:startを打ち消し全幅センタリングを維持 */
     width: auto;
     margin: 2px 0 4px;
     font-size: 14px;
@@ -890,7 +1095,10 @@ body {
   .crossTalkPhoto02 { grid-row: 3; grid-column: 3; }
   .crossTalkPhoto01 { grid-row: 3; grid-column: 4; }
 
+  /* 従来はbaseの position:absolute に依存していたため明示する */
   .crossTalkStickyLeft {
+    position: absolute;
+    grid-area: auto;
     top: auto;
     bottom: -24px;
     left: -12px;
@@ -899,6 +1107,8 @@ body {
     transform: rotate(-3deg);
   }
   .crossTalkStickyRight {
+    position: absolute;
+    grid-area: auto;
     top: -20px;
     left: auto;
     right: -12px;
@@ -926,13 +1136,21 @@ body {
   /* ---- フッター ---- */
   .footer {
     position: static;
+    display: block;
     width: auto;
     height: auto;
     padding: 38px 24px 44px;
     border-radius: 26px 26px 0 0;
   }
+  .footer > *,
+  .footerBrand > * {
+    justify-self: auto;
+    align-self: auto;
+  }
 
-  .footerLogo { position: static; }
+  .footerBrand { display: block; margin: 0; }
+
+  .footerLogo { position: static; margin: 0; }
   .footerLogo img { width: 168px; }
   .footerLogoEn { font-size: 13px; }
 
@@ -943,6 +1161,7 @@ body {
 
   .footerAddress {
     position: static;
+    margin: 0;
     font-size: 13px;
     line-height: 22px;
   }
@@ -951,12 +1170,14 @@ body {
   .footerNav {
     display: grid;
     gap: 28px;
-    margin-top: 30px;
+    margin: 30px 0 0;
   }
+  .footerNavCol { width: auto; margin: 0; }
 
   .footerNavHead {
     position: static;
     width: auto;
+    margin: 0;
     text-align: left;
     font-size: 17px;
   }
@@ -967,7 +1188,7 @@ body {
 
   .footerNavList {
     position: static;
-    margin-top: 14px;
+    margin: 14px 0 0;
     font-size: 14px;
   }
   .footerNavList li {
@@ -978,10 +1199,10 @@ body {
 
   .footerNavSub {
     position: static;
-    margin-top: 12px;
+    margin: 12px 0 0;
     font-size: 12px;
   }
-  .footerNavListIndent { padding-left: 14px; }
+  .footerNavListIndent { margin: 14px 0 0; padding-left: 14px; }
 
   .footerNavCol4 {
     display: flex;
@@ -995,8 +1216,14 @@ body {
   ワークフロー ホットスポット(部署ラベルのリンク化)
 ============================================================ */
 /* PC:イラスト上のラベルへ透明の当たり判定を重ねる */
+/* ul/li は display:contents のため、ボタン自身が .work の grid 子になる */
 .workSpot {
-  position: absolute;
+  grid-area: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+  justify-self: start;
+  align-self: start;
+  position: relative;
   display: block;
   padding: 0;
   border: 0;
@@ -1014,12 +1241,13 @@ body {
   outline: none;
 }
 
-.workSpotEigyo   { top: 2028px; left: 384px;  width: 122px; height: 134px; }
-.workSpotSeisaku { top: 1898px; left: 618px;  width: 128px; height: 124px; }
-.workSpotInsatsu { top: 2023px; left: 983px;  width: 118px; height: 124px; }
-.workSpotKako    { top: 2348px; left: 873px;  width: 224px; height: 118px; }
-.workSpotSoumu   { top: 2452px; left: 313px;  width: 112px; height: 118px; }
-.workSpotDekita  { top: 2502px; left: 823px;  width: 238px; height: 94px; }
+/* margin はイラスト上端(y=1818.5)基準 */
+.workSpotEigyo   { margin: 209.5px 0 0 384px; width: 122px; height: 134px; } /* y=2028 */
+.workSpotSeisaku { margin: 79.5px 0 0 618px;  width: 128px; height: 124px; } /* y=1898 */
+.workSpotInsatsu { margin: 204.5px 0 0 983px; width: 118px; height: 124px; } /* y=2023 */
+.workSpotKako    { margin: 529.5px 0 0 873px; width: 224px; height: 118px; } /* y=2348 */
+.workSpotSoumu   { margin: 633.5px 0 0 313px; width: 112px; height: 118px; } /* y=2452 */
+.workSpotDekita  { margin: 683.5px 0 0 823px; width: 238px; height: 94px; }  /* y=2502 */
 
 /* ============================================================
   全画面モーダル
@@ -1109,8 +1337,13 @@ body.isModalOpen { overflow: hidden; }
     gap: 10px;
     padding: 18px 16px 0;
   }
+  /* PCの display:contents を打ち消し、従来どおり li をフレックスアイテムにする */
+  .workSpotList > li { display: block; }
   .workSpot {
     position: static;
+    margin: 0; /* PC(gridスタック)の座標マージンをリセット */
+    justify-self: auto;
+    align-self: auto;
     width: auto;
     height: auto;
     padding: 9px 17px;
