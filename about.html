@@ -11,6 +11,57 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="style.css">
+  <style>
+  /* 上部水色帯と本文の方眼紙背景を画面端まで延長(このページ用の追加指定) */
+  .subHero { position: relative; }
+  /* 帯のベタ水色を全幅に敷く(装飾画像の背面) */
+  .subHero::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    height: 204px; /* 帯のベタ水色部分の高さ(カンプ1x) */
+    left: 0;
+    right: 0;
+    background: #ace5fc;
+    pointer-events: none;
+  }
+  /* 装飾(ビル・波)は画面右端でブリードさせ、左は水色で埋める。
+     左右のトンボ余白はクリップして水色をシームレスに繋ぐ */
+  .subHeroBand { justify-self: end; clip-path: inset(0 15px); }
+  /* 方眼紙は左の余白(58.3px)は維持し、右だけ画面端まで伸ばす */
+  .subMain { position: relative; background-color: transparent; background-image: none; }
+  .subMain::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: -58.3px; /* 768〜1599pxは等倍縮小のため右端=画面右端 */
+    background-color: var(--colorPaper);
+    background-image:
+      repeating-linear-gradient(to right,
+        rgba(90, 204, 249, 0.085) 0 2px, transparent 2px 35.75px),
+      repeating-linear-gradient(to bottom,
+        rgba(90, 204, 249, 0.085) 0 2px, transparent 2px 35.75px);
+    pointer-events: none;
+  }
+  @media (min-width: 1600px) {
+    /* 1600px以上は中央寄せなので両端をビューポート端へ */
+    .subHero::before {
+      left: calc((1600px - 100vw) / 2);
+      right: calc((1600px - 100vw) / 2);
+    }
+    .subHeroBand { margin-right: calc((1600px - 100vw) / 2); } /* 装飾を画面右端へ */
+    .subMain::before { right: calc(741.7px - 50vw); }
+  }
+  @media (max-width: 767px) {
+    /* SPは帯画像が全幅・方眼紙も余白なしのため延長要素を画面内に収める */
+    .subHero::before { display: none; }
+    .subMain::before { right: 0; }
+  }
+  </style>
 </head>
 <body class="subPage aboutPage">
 
