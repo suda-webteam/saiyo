@@ -1370,3 +1370,528 @@ body.isModalOpen { overflow: hidden; }
   .modalCaption { font-size: 14px; }
   .modalClose { top: -14px; right: -4px; width: 42px; height: 42px; }
 }
+
+/* ============================================================
+  下層ページ共通(about / faq / recruit)
+  1600pxカンプ座標系を踏襲しつつ、縦流れの通常フロー+flexで構成
+============================================================ */
+.subPage .page { height: auto; }
+
+/* ---------- 下層ヘッダー ---------- */
+.subHeader {
+  display: flex;
+  align-items: center;
+  height: 114px;
+  padding: 0 36px 0 30px;
+  background: #fff;
+}
+.subHeaderLogo { display: flex; flex-direction: column; align-items: center; }
+.subHeaderLogo img { width: 172px; height: auto; }
+.subHeaderCaption {
+  display: block;
+  margin-top: 5px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-indent: 0.24em;
+  color: var(--colorBrand);
+}
+.subNavList {
+  display: flex;
+  gap: 44px;
+  margin: 0 auto 0 200px;
+}
+.subNavList a {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--colorBrand);
+  transition: opacity 0.25s;
+  white-space: nowrap;
+}
+.subNavList a:hover { opacity: 0.6; }
+.subHeaderOfficialBtn { flex: none; }
+
+/* ---------- ヒーロー帯(装飾は画像・タイトル/パンくずはライブテキスト) ---------- */
+.subHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+.subHero > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+  justify-self: start;
+  align-self: start;
+  position: relative;
+}
+.subHeroBand { width: 1600px; height: auto; pointer-events: none; }
+.subHeroTitle {
+  margin: 76px 0 0 325px;
+  font-family: var(--fontMaru);
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.35em;
+  color: #fff;
+  text-shadow: 3px 4px 7px rgba(90, 130, 160, 0.35);
+}
+.breadcrumb {
+  margin: 226px 0 0 330px;
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--colorBrand);
+}
+.breadcrumb a { transition: opacity 0.25s; }
+.breadcrumb a:hover { opacity: 0.6; }
+.breadcrumb .breadcrumbSep { margin: 0 1em; }
+
+/* ---------- 方眼紙メイン ---------- */
+.subMain {
+  margin: 0 58.3px;
+  padding: 60px 0 70px;
+  background-color: var(--colorPaper);
+  background-image:
+    repeating-linear-gradient(to right,
+      rgba(90, 204, 249, 0.085) 0 2px, transparent 2px 35.75px),
+    repeating-linear-gradient(to bottom,
+      rgba(90, 204, 249, 0.085) 0 2px, transparent 2px 35.75px);
+}
+
+/* ---------- 下部ストリップ+フッター(下層は通常フローで配置) ---------- */
+.subPage .bottomStrip {
+  position: static;
+  display: block;
+  margin: -20px 0 0; /* 方眼紙の下端に重なる(カンプ準拠) */
+}
+.subPage .footer {
+  position: static;
+  margin: 0 0 0 1px;
+}
+
+/* ---------- 戻るボタン ---------- */
+.backBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 211px;
+  height: 67.9px;
+  margin: 72px auto 0;
+  border-radius: 34px;
+  background: var(--colorBrand);
+  transition: opacity 0.25s;
+}
+.backBtn:hover { opacity: 0.85; }
+.backBtnLabel {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+  color: #fff;
+}
+
+/* ---------- 問い合わせカード(faq / recruit共通) ---------- */
+.contactLead {
+  margin-top: 74px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+.contactArrow {
+  width: 0;
+  height: 0;
+  margin: 12px auto 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 18px solid var(--colorBrand);
+}
+.contactCard {
+  width: 414px;
+  margin: 18px auto 0;
+  padding: 32px 0 36px;
+  background: #fffcf6;
+  box-shadow: 5px 6px 12px rgba(0, 0, 0, 0.18);
+  text-align: center;
+}
+.contactCardDept {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+}
+.contactCardName {
+  margin-top: 10px;
+  font-size: 27px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-indent: 0.1em;
+  line-height: 1.4;
+}
+.contactCardBars {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+.contactCardBars span { width: 38px; height: 5px; }
+.contactCardBars span:nth-child(1) { background: var(--colorCyan); }
+.contactCardBars span:nth-child(2) { background: var(--colorPink); }
+.contactCardBars span:nth-child(3) { background: var(--colorYellow); }
+.contactCardBars span:nth-child(4) { background: #1a1a1a; }
+.contactCardTel {
+  margin-top: 18px;
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  line-height: 1.9;
+}
+
+/* ============================================================
+  私たちの会社(about.html)
+============================================================ */
+.aboutRead {
+  width: 1080px;
+  margin: 14px auto 0;
+  padding-left: 50px;
+  font-size: 31px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--colorText);
+}
+.aboutReadLinks { font-size: 22px; color: var(--colorBrand); letter-spacing: 0.08em; }
+.aboutReadLinks a { transition: opacity 0.25s; }
+.aboutReadLinks a:hover { opacity: 0.6; }
+
+/* 開き本(背景・左ページはカンプ画像 / 右ページ本文と付箋はライブテキスト) */
+.aboutBook {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  width: 1080px;
+  margin: 60px auto 0;
+}
+.aboutBook > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+  justify-self: start;
+  align-self: start;
+  position: relative;
+}
+.aboutBookBg { width: 1080px; height: auto; pointer-events: none; }
+.aboutBookStickyLabel {
+  margin: 47px 0 0 988px; /* page基準 x=1250 y=610 */
+  font-size: 20px;
+  white-space: nowrap;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--colorBrand);
+}
+.aboutBookText {
+  margin: 145px 0 0 605px; /* page基準 x=867 y=720 */
+  width: 420px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 44px;
+  letter-spacing: 0.05em;
+}
+
+/* アウトラインボタン3つ */
+.aboutBtnRow {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 30px;
+}
+.aboutOutlineBtn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 255px;
+  height: 104px;
+  border: 1.5px solid var(--colorBrand);
+  border-radius: 18px;
+  background: #fff;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-indent: 0.14em;
+  color: var(--colorBrand);
+  transition: background-color 0.25s;
+}
+.aboutOutlineBtn:hover { background: #e9f5fd; }
+.aboutOutlineBtn img {
+  position: absolute;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+}
+
+/* 写真プレースホルダー2枚(実写真差し替え前提) */
+.aboutPhotoRow {
+  display: flex;
+  justify-content: center;
+  gap: 27px;
+  margin-top: 58px;
+}
+.aboutPhotoRow .aboutPhotoItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 472px;
+  height: 483px;
+  background: #b9c7d0;
+}
+.aboutPhotoItem span {
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--colorText);
+}
+
+/* 数字で見る須田製版 */
+.aboutStatsTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-top: 101px;
+}
+.aboutStatsTitle h2 {
+  font-family: var(--fontMaru);
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--colorText);
+}
+.aboutStatsTitle img { width: 76px; height: auto; }
+.aboutStatsCard {
+  display: block;
+  width: 1445px;
+  height: auto;
+  margin: 4px auto 0;
+  max-width: 100%;
+}
+
+/* ============================================================
+  FAQ(faq.html)
+============================================================ */
+.faqList {
+  width: 1000px;
+  margin: 0 auto;
+}
+.faqItem { padding: 22px 0 26px; border-bottom: 1px solid #a9a9a4; }
+.faqItem:first-child { padding-top: 8px; }
+.faqQ {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--colorBrand);
+}
+.faqA {
+  margin: 16px 0 0 34px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0.04em;
+  white-space: pre-line;
+}
+
+/* ============================================================
+  募集要項(recruit.html)
+============================================================ */
+.recruitTabs {
+  display: flex;
+  justify-content: center;
+}
+.recruitTab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 328px;
+  height: 80px;
+  background: #fff;
+  border-radius: 8px 8px 0 0;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--colorText);
+  cursor: pointer;
+  border: 0;
+}
+.recruitTab.isActive {
+  background: var(--colorBrand);
+  color: #fff;
+}
+
+.recruitTable {
+  width: 1000px;
+  margin: 78px auto 0;
+  border-collapse: collapse;
+  border: 2.5px solid var(--colorBrand);
+  background: #fff;
+}
+.recruitTable th,
+.recruitTable td {
+  border: 0;
+  border-top: 1px solid #c9d4e4;
+  padding: 18px 26px;
+  text-align: left;
+  vertical-align: middle;
+}
+.recruitTable tr:first-child th,
+.recruitTable tr:first-child td { border-top: 0; }
+.recruitTable th {
+  width: 215px;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--colorBrand);
+  text-align: center;
+}
+.recruitTable td {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: 0.04em;
+}
+.recruitTable .recruitToggleCell { position: relative; }
+.recruitToggle {
+  position: absolute;
+  top: 50%;
+  right: 22px;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--colorBrand);
+  cursor: pointer;
+}
+.recruitToggle::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 2.5px;
+  background: #fff;
+  transform: translate(-50%, -50%);
+}
+
+.recruitClosed {
+  display: flex;
+  width: 1000px;
+  margin: 55px auto 0;
+  border: 1px solid #c9c9c9;
+  background: #e6e6e6;
+}
+.recruitTable + .recruitClosed { margin-top: 76px; }
+.recruitClosed dt {
+  flex: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 215px;
+  height: 78px;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--colorText);
+  border-right: 1px solid #c9c9c9;
+}
+.recruitClosed dd {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+}
+
+/* ============================================================
+  下層ページ 個別調整(カンプ縦位置合わせ)
+============================================================ */
+.aboutPage .subMain { padding-bottom: 45px; }
+.aboutPage .backBtn { margin-top: 44px; }
+.faqPage .subMain { padding-top: 20px; padding-bottom: 50px; }
+.recruitPage .subMain { padding-top: 85px; padding-bottom: 61px; }
+.recruitPage .contactLead { margin-top: 56px; }
+
+/* ============================================================
+  下層ページ SP(〜767px)
+============================================================ */
+@media (max-width: 767px) {
+  .subHeader { display: none; }
+  .subPage .page { padding-top: 56px; }
+
+  .subHeroBand { width: 100%; }
+  .subHeroTitle { margin: 6% 0 0 6%; font-size: 26px; }
+  .breadcrumb { margin: 15% 0 0 5%; font-size: 12px; }
+
+  .subMain { margin: 0; padding: 30px 0 44px; }
+  .subPage .subMain { padding-top: 30px; padding-bottom: 44px; }
+
+  /* 「版」装飾ストリップはSP非表示(PC用の通常フロー指定より優先) */
+  .subPage .bottomStrip { display: none; }
+  .subPage .footer { margin-left: 0; }
+
+  .backBtn { width: 180px; height: 56px; margin-top: 40px; }
+  .subPage .backBtn { margin-top: 40px; }
+  .backBtnLabel { font-size: 16px; }
+
+  .contactLead { margin-top: 56px; font-size: 14px; padding: 0 16px; }
+  .contactCard { width: min(86%, 414px); }
+  .contactCardTel { font-size: 14px; }
+
+  /* about */
+  .aboutRead { width: auto; margin: 0 20px; font-size: 17px; }
+  .aboutReadLinks { font-size: 13px; }
+  .aboutBook { width: calc(100% - 24px); margin: 14px auto 0; }
+  .aboutBookBg { width: 100%; }
+  .aboutBookStickyLabel { margin: 4.5% 0 0 78%; font-size: 12px; letter-spacing: 0.05em; }
+  /* SPは見開き画像の下に本文を通常フローで表示(改行は無効化して自然折返し) */
+  .aboutBookText {
+    grid-area: 2 / 1;
+    margin: 14px 8px 0;
+    width: auto;
+    font-size: 13px;
+    line-height: 2;
+  }
+  .aboutBookText br { display: none; }
+  .aboutBtnRow { flex-wrap: wrap; gap: 14px; margin-top: 34px; padding: 0 16px; }
+  .aboutOutlineBtn { width: 210px; height: 64px; font-size: 15px; }
+  .aboutOutlineBtn img { right: 18px; width: 20px; height: 20px; }
+  .aboutPhotoRow { flex-direction: column; align-items: center; gap: 18px; margin-top: 36px; }
+  .aboutPhotoRow .aboutPhotoItem { width: min(86%, 472px); aspect-ratio: 472 / 483; height: auto; }
+  .aboutPhotoItem span { font-size: 30px; }
+  .aboutStatsTitle { gap: 12px; margin-top: 70px; }
+  .aboutStatsTitle h2 { font-size: 20px; }
+  .aboutStatsTitle img { width: 46px; }
+  .aboutStatsCard { width: calc(100% - 16px); }
+
+  /* faq */
+  .faqList { width: auto; margin: 0 20px; }
+  .faqQ { font-size: 15px; }
+  .faqA { margin-left: 12px; font-size: 13px; line-height: 24px; }
+
+  /* recruit */
+  .recruitTab { width: 46%; height: 58px; font-size: 14px; }
+  .recruitTable { width: calc(100% - 24px); margin: 30px auto 0; }
+  .recruitTable th, .recruitTable td { display: block; width: auto; }
+  .recruitTable th {
+    border-top: 1px solid #c9d4e4;
+    background: #eef4fb;
+    padding: 10px 16px;
+    text-align: left;
+  }
+  .recruitTable tr:first-child th { border-top: 0; }
+  .recruitTable td { border-top: 0; padding: 14px 16px; }
+  .recruitClosed { width: calc(100% - 24px); }
+  .recruitClosed dt { width: 118px; height: 56px; font-size: 13px; }
+  .recruitClosed dd { font-size: 12px; padding: 8px; }
+}
