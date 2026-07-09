@@ -106,25 +106,11 @@
   .cCyan { background: var(--colorCyan); box-shadow: 0 0 0 4px #d8f2fd; }
   .cYellow { background: var(--colorYellow); box-shadow: 0 0 0 4px #fcf6cf; }
 
-  /* ===== 他メンバー(社員インタビュー一覧) ===== */
-  .ivMembers { position: relative; margin-top: 96px; padding: 66px 0 50px; overflow: hidden; }
-  .ivMembers::before { content: ""; position: absolute; z-index: 0; left: 50%; top: 150px;
-    width: 1460px; height: 150px; transform: translateX(-50%);
-    background: url(images/squiggleHeroPink.png) center/1460px 150px no-repeat; opacity: 0.85; pointer-events: none; }
-  .ivMembersInner { position: relative; z-index: 1; width: 1400px; margin: 0 auto;
-    display: flex; justify-content: space-between; align-items: flex-start; }
-  .ivMemberLink { position: relative; width: 210px; text-align: center; text-decoration: none; }
-  .ivMemberLink:nth-child(even) { margin-top: 66px; }
-  .ivMemberRole { margin-bottom: 12px; font-size: 15px; font-weight: 700;
-    letter-spacing: 0.06em; color: var(--colorBrand); }
-  .ivAvatarWrap { position: relative; display: block; width: 172px; margin: 0 auto; }
-  .ivAvatar { display: block; width: 172px; height: 172px; border-radius: 50%;
-    overflow: hidden; background: #dfe6ea; border: 4px solid #fff; box-shadow: 0 4px 12px rgba(60,90,120,0.18); }
-  .ivAvatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .ivPlus { position: absolute; z-index: 2; right: 8px; bottom: 6px; width: 40px; height: 40px;
-    border-radius: 50%; background: var(--colorBrand); color: #fff; display: flex;
-    align-items: center; justify-content: center; font-size: 26px; line-height: 1; font-weight: 400;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+  /* ===== 他メンバー(社員インタビュー一覧 / index.htmlの memberList を流用) ===== */
+  .ivInterviewList { position: relative; margin-top: 80px; padding: 46px 0 34px; overflow: hidden; }
+  .ivInterviewList::before { content: ""; position: absolute; z-index: 0; left: 0; right: 0; top: 96px;
+    height: 300px; background: url(images/squigglePink.png) center / 2500px 300px no-repeat; pointer-events: none; }
+  .ivInterviewList .memberList { position: relative; z-index: 1; margin: 0; justify-content: center; }
 
   /* ===== SP ===== */
   @media (max-width: 767px) {
@@ -143,10 +129,8 @@
     .ivSchedTitle { font-size: 18px; gap: 12px; }
     .ivSchedTitle::before, .ivSchedTitle::after { width: 30px; }
     .ivSchedGrid { grid-template-columns: 1fr; gap: 0; }
-    .ivMembers::before { display: none; }
-    .ivMembersInner { width: auto; margin: 0 16px; flex-wrap: wrap; justify-content: center; gap: 24px; }
-    .ivMemberLink, .ivMemberLink:nth-child(even) { width: 45%; margin-top: 0; }
-    .ivAvatar { width: 130px; height: 130px; }
+    .ivInterviewList { margin-top: 40px; padding: 0; }
+    .ivInterviewList::before { display: none; }
   }
   </style>
 </head>
@@ -289,31 +273,26 @@
       </div>
     </section>
 
-    <!-- 他メンバー(社員インタビュー一覧) -->
-    <nav class="ivMembers" aria-label="他の社員インタビュー">
-      <div class="ivMembersInner">
-        <a class="ivMemberLink" href="#">
-          <p class="ivMemberRole">営業</p>
-          <span class="ivAvatarWrap"><span class="ivAvatar"><img src="images/interview_m1.jpg" alt=""></span><span class="ivPlus">+</span></span>
-        </a>
-        <a class="ivMemberLink" href="#">
-          <p class="ivMemberRole">営業</p>
-          <span class="ivAvatarWrap"><span class="ivAvatar"><img src="images/interview_m2.jpg" alt=""></span><span class="ivPlus">+</span></span>
-        </a>
-        <a class="ivMemberLink" href="#">
-          <p class="ivMemberRole">営業／課長補佐</p>
-          <span class="ivAvatarWrap"><span class="ivAvatar"><img src="images/interview_m3.jpg" alt=""></span><span class="ivPlus">+</span></span>
-        </a>
-        <a class="ivMemberLink" href="#">
-          <p class="ivMemberRole">制作／次長</p>
-          <span class="ivAvatarWrap"><span class="ivAvatar"><img src="images/interview_m4.jpg" alt=""></span><span class="ivPlus">+</span></span>
-        </a>
-        <a class="ivMemberLink" href="#">
-          <p class="ivMemberRole">制作／課長補佐</p>
-          <span class="ivAvatarWrap"><span class="ivAvatar"><img src="images/interview_m5.jpg" alt=""></span><span class="ivPlus">+</span></span>
-        </a>
-      </div>
-    </nav>
+    <!-- 他メンバー(社員インタビュー一覧 / index.htmlのパーツを流用) -->
+    <div class="ivInterviewList">
+      <ul class="memberList">
+        <li class="memberItem memberMiura">
+          <a href="#"><img src="images/memberMiura.png" alt="社員インタビュー：営業" width="314" height="295"></a>
+        </li>
+        <li class="memberItem memberKojima">
+          <a href="#"><img src="images/memberKojima.png" alt="社員インタビュー：営業" width="314" height="295"></a>
+        </li>
+        <li class="memberItem memberTakada">
+          <a href="#"><img src="images/memberTakada.png" alt="社員インタビュー：営業 課長補佐" width="318" height="295"></a>
+        </li>
+        <li class="memberItem memberIrie">
+          <a href="#"><img src="images/memberIrie.png" alt="社員インタビュー：制作 次長" width="314" height="300"></a>
+        </li>
+        <li class="memberItem memberChida">
+          <a href="#"><img src="images/memberChida.png" alt="社員インタビュー：制作 課長補佐" width="317" height="295"></a>
+        </li>
+      </ul>
+    </div>
 
     <a class="pillBtn backBtn" href="index.html#interview"><span class="backBtnLabel">戻る</span></a>
   </main>
