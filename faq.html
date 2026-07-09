@@ -26,9 +26,9 @@
     background: #ace5fc;
     pointer-events: none;
   }
-  /* 装飾(はてなマーク)は画面右端でブリードさせ、左は水色で埋める。
+  /* 帯は左寄せのまま(トンボ見当をグリッド角に固定するため)。
      左右のトンボ余白はクリップして水色をシームレスに繋ぐ */
-  .subHeroBand { justify-self: end; clip-path: inset(0 15px); }
+  .subHeroBand { clip-path: inset(0 15px); }
   /* 方眼紙は左の余白(58.3px)は維持し、右だけ画面端まで伸ばす */
   .subMain { position: relative; background-color: transparent; background-image: none; }
   .subMain::before {
@@ -47,19 +47,38 @@
         rgba(90, 204, 249, 0.085) 0 2px, transparent 2px 35.75px);
     pointer-events: none;
   }
+  /* トンボ(コーナー見当)を方眼紙の上に重ねる(帯画像側の見当と繋がる) */
+  .subMain::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 0;            /* 方眼紙の上端 */
+    left: -58.3px;     /* ページ左端(x=0)基準 */
+    width: 1600px;
+    height: 26px;
+    pointer-events: none;
+    background-image:
+      linear-gradient(#111, #111),  /* 左: 縦(方眼紙内へ延長) */
+      linear-gradient(#111, #111),  /* 左: 横(コーナー) */
+      linear-gradient(#111, #111),  /* 右: 横(見当) */
+      linear-gradient(#111, #111);  /* 右: 縦(見当) */
+    background-repeat: no-repeat;
+    background-position: 54px 0, 0 19px, 1496px 0, 1543px 0;
+    background-size: 1px 19px, 54px 1px, 97px 1px, 1px 18px;
+  }
   @media (min-width: 1600px) {
     /* 1600px以上は中央寄せなので両端をビューポート端へ */
     .subHero::before {
       left: calc((1600px - 100vw) / 2);
       right: calc((1600px - 100vw) / 2);
     }
-    .subHeroBand { margin-right: calc((1600px - 100vw) / 2); } /* 装飾を画面右端へ */
     .subMain::before { right: calc(741.7px - 50vw); }
   }
   @media (max-width: 767px) {
     /* SPは帯画像が全幅・方眼紙も余白なしのため延長要素を画面内に収める */
     .subHero::before { display: none; }
     .subMain::before { right: 0; }
+    .subMain::after { display: none; } /* トンボはSPでは非表示 */
   }
   </style>
 </head>
