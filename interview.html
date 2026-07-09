@@ -88,23 +88,27 @@
     border-radius: 8px; padding: 40px 66px 30px; box-shadow: 0 3px 14px rgba(80,120,150,0.06); }
   .ivSchedTitle { display: flex; align-items: center; justify-content: center; gap: 22px;
     font-size: 22px; font-weight: 700; letter-spacing: 0.12em; color: var(--colorText); }
-  .ivSchedTitle::before, .ivSchedTitle::after { content: ""; width: 90px; border-top: 2px dashed #b9b9b9; }
-  .ivSchedGrid { margin-top: 34px; display: grid; grid-template-columns: 1fr 1fr; gap: 0 70px; }
-  .ivSchedItem { display: flex; gap: 16px; }
-  .ivSchedMark { flex: none; width: 66px; text-align: center; position: relative; }
-  .ivSchedMark::before { content: ""; position: absolute; top: 6px; bottom: -6px; left: 50%;
-    width: 2px; background: #e0e0d8; transform: translateX(-50%); z-index: 0; }
-  .ivSchedGrid .ivSchedItem:nth-child(5) .ivSchedMark::before,
-  .ivSchedGrid .ivSchedItem:nth-child(6) .ivSchedMark::before { display: none; }
-  .ivDot { position: relative; z-index: 1; display: inline-block; width: 15px; height: 15px;
-    border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px #fff; }
-  .ivSchedMark b { display: block; margin-top: 8px; font-size: 16px; font-weight: 700; color: var(--colorText); }
-  .ivSchedMark small { display: block; font-size: 13px; color: var(--colorText); }
-  .ivSchedDesc { flex: 1; padding-top: 1px; font-size: 14px; line-height: 1.85; color: var(--colorText); }
-  .ivSchedItem { padding-bottom: 30px; }
-  .cPink { background: var(--colorPink); box-shadow: 0 0 0 4px #fbe1f5; }
-  .cCyan { background: var(--colorCyan); box-shadow: 0 0 0 4px #d8f2fd; }
-  .cYellow { background: var(--colorYellow); box-shadow: 0 0 0 4px #fcf6cf; }
+  .ivSchedTitle::before, .ivSchedTitle::after { content: ""; width: 200px; max-width: 22%;
+    border-top: 2px dashed #6fb2df; }
+  .ivSchedGrid { margin-top: 36px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 80px; }
+  .ivSchedCol { min-width: 0; }
+  .ivSchedItem { position: relative; display: grid; grid-template-columns: 22px 78px 1fr;
+    column-gap: 14px; padding-bottom: 40px; }
+  .ivSchedCol .ivSchedItem:last-child { padding-bottom: 4px; }
+  /* ドット間をつなぐ縦線 */
+  .ivSchedItem::before { content: ""; position: absolute; z-index: 0; left: 10px; top: 20px;
+    bottom: -2px; width: 2px; background: #ddd; display: none; }
+  .ivSchedItem.lPink::before { display: block; background: var(--colorPink); opacity: 0.6; }
+  .ivSchedItem.lCyan::before { display: block; background: var(--colorCyan); opacity: 0.75; }
+  /* ドット(カラーのリング) */
+  .ivDot { position: relative; z-index: 1; box-sizing: border-box; width: 16px; height: 16px;
+    margin-top: 3px; border-radius: 50%; background: #fff; }
+  .ivDot.cPink { border: 4px solid var(--colorPink); }
+  .ivDot.cCyan { border: 4px solid var(--colorCyan); }
+  .ivDot.cYellow { border: 4px solid var(--colorYellow); }
+  .ivSchedLabel b { display: block; font-size: 16px; font-weight: 700; letter-spacing: 0.02em; color: var(--colorText); }
+  .ivSchedLabel small { display: block; margin-top: 3px; font-size: 13px; color: var(--colorText); }
+  .ivSchedDesc { padding-top: 1px; font-size: 14px; line-height: 1.9; color: var(--colorText); }
 
   /* ===== 他メンバー(社員インタビュー一覧 / index.htmlの memberList を流用) ===== */
   .ivInterviewList { position: relative; margin-top: 80px; padding: 46px 0 34px; overflow: hidden; }
@@ -216,29 +220,39 @@
     <div class="ivSchedule">
       <p class="ivSchedTitle">1日のスケジュール</p>
       <div class="ivSchedGrid">
-        <div class="ivSchedItem">
-          <div class="ivSchedMark"><span class="ivDot cPink"></span><b>8:30</b><small>出社</small></div>
-          <p class="ivSchedDesc">8時半までには出社し、1日の流れを確認します。</p>
+        <div class="ivSchedCol">
+          <div class="ivSchedItem lPink">
+            <span class="ivDot cPink"></span>
+            <div class="ivSchedLabel"><b>8:30</b><small>出社</small></div>
+            <p class="ivSchedDesc">8時半までには出社し、1日の流れを確認します。</p>
+          </div>
+          <div class="ivSchedItem lPink">
+            <span class="ivDot cPink"></span>
+            <div class="ivSchedLabel"><b>10:00</b><small>外回り</small></div>
+            <p class="ivSchedDesc">納品に行ったり、クライアントに顔を出してお話をしたりします。</p>
+          </div>
+          <div class="ivSchedItem">
+            <span class="ivDot cYellow"></span>
+            <div class="ivSchedLabel"><b>12:00</b><small>昼食</small></div>
+            <p class="ivSchedDesc">1時間ランチ休憩をします。お昼は毎回持参しています。</p>
+          </div>
         </div>
-        <div class="ivSchedItem">
-          <div class="ivSchedMark"><span class="ivDot cPink"></span><b>13:00</b><small>事務作業</small></div>
-          <p class="ivSchedDesc">午前にお客様から相談いただいたお見積りを立てたり、校正のチェックをしたりします。</p>
-        </div>
-        <div class="ivSchedItem">
-          <div class="ivSchedMark"><span class="ivDot cCyan"></span><b>10:00</b><small>外回り</small></div>
-          <p class="ivSchedDesc">納品に行ったり、クライアントに顔を出してお話をしたりします。</p>
-        </div>
-        <div class="ivSchedItem">
-          <div class="ivSchedMark"><span class="ivDot cCyan"></span><b>15:00</b><small>打合せ</small></div>
-          <p class="ivSchedDesc">週に1回必ず課の会議を行い、常に情報を共有しています。</p>
-        </div>
-        <div class="ivSchedItem">
-          <div class="ivSchedMark"><span class="ivDot cYellow"></span><b>12:00</b><small>昼食</small></div>
-          <p class="ivSchedDesc">1時間ランチ休憩をします。お昼は毎回持参しています。</p>
-        </div>
-        <div class="ivSchedItem">
-          <div class="ivSchedMark"><span class="ivDot cYellow"></span><b>17:30</b><small>退勤</small></div>
-          <p class="ivSchedDesc">明日のスケジュールを調整し、退勤します。</p>
+        <div class="ivSchedCol">
+          <div class="ivSchedItem lCyan">
+            <span class="ivDot cCyan"></span>
+            <div class="ivSchedLabel"><b>13:00</b><small>事務作業</small></div>
+            <p class="ivSchedDesc">午前にお客様から相談いただいたお見積りを立てたり、校正のチェックをしたりします。</p>
+          </div>
+          <div class="ivSchedItem lCyan">
+            <span class="ivDot cCyan"></span>
+            <div class="ivSchedLabel"><b>15:00</b><small>打合せ</small></div>
+            <p class="ivSchedDesc">週に1回必ず課の会議を行い、常に情報を共有しています。</p>
+          </div>
+          <div class="ivSchedItem">
+            <span class="ivDot cCyan"></span>
+            <div class="ivSchedLabel"><b>17:30</b><small>退勤</small></div>
+            <p class="ivSchedDesc">明日のスケジュールを調整し、退勤します。</p>
+          </div>
         </div>
       </div>
     </div>
