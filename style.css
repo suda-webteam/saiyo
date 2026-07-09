@@ -1945,7 +1945,7 @@ body.isModalOpen { overflow: hidden; }
   justify-content: center;
   align-items: flex-end;
   width: 232px;
-  height: 150px;
+  height: 120px;
   overflow: hidden;
   background: #dfe6ea;
 }
@@ -1956,8 +1956,9 @@ body.isModalOpen { overflow: hidden; }
   font-weight: 700;
   letter-spacing: 0.06em;
   color: var(--colorBrand);
+  text-align: center;
 }
-.ctMemberMeta { margin-top: 4px; font-size: 12px; line-height: 20px; color: var(--colorText); }
+.ctMemberMeta { margin-top: 4px; font-size: 12px; line-height: 20px; color: var(--colorText); text-align: center; }
 .ctMemberDesc { margin-top: 6px; font-size: 11.5px; line-height: 18px; color: var(--colorText); }
 
 /* Q見出し */
