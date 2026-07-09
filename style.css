@@ -1949,7 +1949,7 @@ body.isModalOpen { overflow: hidden; }
   overflow: hidden;
   background: #dfe6ea;
 }
-.ctMemberPhoto img { width: auto; height: 150px; object-fit: contain; }
+.ctMemberPhoto img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .ctMemberName {
   margin-top: 10px;
   font-size: 15px;
@@ -2024,6 +2024,7 @@ body.isModalOpen { overflow: hidden; }
   color: var(--colorText);
 }
 .ctPhotoWide { width: 700px; height: 380px; }
+.ctPhoto img, .ctClosePhoto img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* 下部グループ写真 */
 .ctClosePhoto {
