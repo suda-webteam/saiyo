@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>若手社員座談会｜株式会社須田製版 採用サイト</title>
+  <meta name="description" content="株式会社須田製版の若手社員による座談会。入社の理由、入社後のこと、働いて良かったこと、これから入社を考えている方へのメッセージをご紹介します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Maru+Gothic:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+  /* ヒーロー: 画像バンドがないためCSSでベタ水色帯を作る */
+  .subHero { position: relative; display: grid;
+    grid-template-columns: minmax(0,1fr); grid-template-rows: minmax(0,1fr); }
+  .subHero > * { grid-area: 1 / 1; min-width: 0; min-height: 0;
+    justify-self: start; align-self: start; position: relative; }
+  .ctHeroSpacer { width: 1600px; height: 262px; }
+  .subHero::before {
+    content: ""; position: absolute; z-index: -1; top: 0; height: 204px;
+    left: 0; right: 0; background: #ace5fc; pointer-events: none;
+  }
+  .subHeroTitle { margin: 60px 0 0 325px; font-family: var(--fontMaru);
+    font-size: 56px; font-weight: 400; line-height: 1; letter-spacing: 0.28em;
+    color: #fff; text-shadow: 3px 4px 7px rgba(90,130,160,0.35); }
+  .ctHeroSub { margin: 140px 0 0 330px; font-family: var(--fontMaru);
+    font-size: 22px; font-weight: 500; letter-spacing: 0.22em; color: #fff; }
+  .breadcrumb { margin: 226px 0 0 330px; font-size: 21px; font-weight: 500;
+    letter-spacing: 0.1em; color: var(--colorBrand); }
+
+  /* 本文の方眼紙背景を右だけ画面端まで延長(左余白は維持) */
+  .subMain { position: relative; background-color: transparent; background-image: none; }
+  .subMain::before {
+    content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 0;
+    right: -58.3px; background-color: var(--colorPaper);
+    background-image:
+      repeating-linear-gradient(to right, rgba(90,204,249,0.085) 0 2px, transparent 2px 35.75px),
+      repeating-linear-gradient(to bottom, rgba(90,204,249,0.085) 0 2px, transparent 2px 35.75px);
+    pointer-events: none;
+  }
+  /* トンボ(コーナー見当) */
+  .subMain::after {
+    content: ""; position: absolute; z-index: 1; top: 0; left: -58.3px;
+    width: 1600px; height: 26px; pointer-events: none;
+    background-image: linear-gradient(#111,#111), linear-gradient(#111,#111),
+      linear-gradient(#111,#111), linear-gradient(#111,#111);
+    background-repeat: no-repeat;
+    background-position: 58px 0, 0 20px, 1499px 0, 1547px 0;
+    background-size: 1px 20px, 58px 1px, 97px 1px, 1px 18px;
+  }
+  @media (min-width: 1600px) {
+    .subHero::before { left: calc((1600px - 100vw) / 2); right: calc((1600px - 100vw) / 2); }
+    .subMain::before { right: calc(741.7px - 50vw); }
+  }
+  @media (max-width: 767px) {
+    .ctHeroSpacer { width: 100%; height: auto; aspect-ratio: 1600 / 300; }
+    .subHeroTitle { margin: 6% 0 0 6%; font-size: 26px; }
+    .ctHeroSub { margin: 17% 0 0 6%; font-size: 13px; }
+    .breadcrumb { margin: 27% 0 0 5%; font-size: 12px; }
+    .subMain::after { display: none; }
+  }
+  </style>
+</head>
+<body class="subPage crosstalkPage">
+
+<!-- ===== SP用ヘッダー(768px未満のみ表示) ===== -->
+<header class="spHeader">
+  <p class="spHeaderLogo">
+    <a href="index.html"><img src="images/logoSuda.png" alt="株式会社 須田製版 採用サイト" width="207" height="44"></a>
+  </p>
+  <button class="spMenuBtn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="spDrawer">
+    <span class="spMenuBtnBar"></span>
+    <span class="spMenuBtnBar"></span>
+    <span class="spMenuBtnBar"></span>
+  </button>
+</header>
+
+<nav class="spDrawer" id="spDrawer" aria-label="グローバルナビゲーション(モバイル)">
+  <ul class="spDrawerList">
+    <li><a href="about.html">私たちの会社</a></li>
+    <li><a href="index.html#work">仕事・人を知る</a></li>
+    <li><a href="recruit.html">募集要項</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a class="officialSiteBtn spDrawerOfficialBtn" href="#" target="_blank" rel="noopener">須田製版公式サイト</a>
+</nav>
+
+<div class="pageScaler">
+<div class="page">
+
+  <!-- ===== 下層ヘッダー ===== -->
+  <header class="subHeader">
+    <p class="subHeaderLogo">
+      <a href="index.html"><img src="images/logoSuda.png" alt="株式会社 須田製版" width="207" height="44"></a>
+      <span class="subHeaderCaption">採用サイト</span>
+    </p>
+    <ul class="subNavList">
+      <li><a href="about.html">私たちの会社</a></li>
+      <li><a href="index.html#work">仕事を知る</a></li>
+      <li><a href="index.html#interview">人を知る</a></li>
+      <li><a href="recruit.html">募集要項</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="#contact">お問合せ</a></li>
+    </ul>
+    <a class="officialSiteBtn subHeaderOfficialBtn" href="#" target="_blank" rel="noopener">須田製版公式サイト</a>
+  </header>
+
+  <!-- ===== ヒーロー帯 ===== -->
+  <div class="subHero">
+    <div class="ctHeroSpacer" aria-hidden="true"></div>
+    <h1 class="subHeroTitle">人を知る</h1>
+    <p class="ctHeroSub">若手社員座談会</p>
+    <p class="breadcrumb"><a href="index.html">TOP</a><span class="breadcrumbSep">＞</span><a href="index.html#interview">人を知る</a><span class="breadcrumbSep">＞</span>若手社員座談会</p>
+  </div>
+
+  <!-- ===== メイン ===== -->
+  <main class="subMain">
+    <!-- タイトルロゴ -->
+    <img class="ctTitle" src="images/crossTalkTitle.png" alt="若手座談会 CROSS TALK" width="700" height="154">
+
+    <!-- メイングループ写真(実写真差し替え前提のプレースホルダー) -->
+    <div class="ctHeroPhoto ctPhoto ctPhotoWide" style="width:1000px;height:430px;margin:40px auto 0;">
+      <span>photo</span>
+    </div>
+
+    <!-- リード文(要差し替え・原稿確認) -->
+    <p class="ctIntro">
+      入社3年以内の若手社員が、今の学生に近い目線で会社や仕事・採用について語り合いました。<br>
+      ※本文は原稿の確認・差し替えが必要です。
+    </p>
+
+    <!-- メンバー紹介 -->
+    <div class="ctMembers">
+      <span class="ctMembersLabel">2026年 取材当時</span>
+      <div class="ctMemberRow">
+        <div class="ctMember">
+          <div class="ctMemberPhoto"><img src="images/zadankai01.png" alt="Tさん" width="201" height="415"></div>
+          <p class="ctMemberName">Tさん</p>
+          <p class="ctMemberMeta">2024年入社</p>
+          <p class="ctMemberDesc">※部署・プロフィール要確認</p>
+        </div>
+        <div class="ctMember">
+          <div class="ctMemberPhoto"><img src="images/zadankai02.png" alt="Sさん" width="194" height="410"></div>
+          <p class="ctMemberName">Sさん</p>
+          <p class="ctMemberMeta">2023年入社</p>
+          <p class="ctMemberDesc">※部署・プロフィール要確認</p>
+        </div>
+        <div class="ctMember">
+          <div class="ctMemberPhoto"><img src="images/zadankai03.png" alt="Mさん" width="213" height="395"></div>
+          <p class="ctMemberName">Mさん</p>
+          <p class="ctMemberMeta">※入社年要確認</p>
+          <p class="ctMemberDesc">※部署・プロフィール要確認</p>
+        </div>
+        <div class="ctMember">
+          <div class="ctMemberPhoto"><img src="images/zadankai04.png" alt="Kさん" width="203" height="424"></div>
+          <p class="ctMemberName">Kさん</p>
+          <p class="ctMemberMeta">※入社年要確認</p>
+          <p class="ctMemberDesc">※部署・プロフィール要確認</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 01 ===== -->
+    <section class="ctSection">
+      <div class="ctQHead"><span class="ctQLabel">question</span><span class="ctQNum">01</span></div>
+      <h2 class="ctQTitle">「印刷会社 須田製版を選んだ理由と採用の時の話を教えてください」</h2>
+      <div class="ctQTitleBar" aria-hidden="true"></div>
+      <div class="ctTalk">
+        <div class="ctBubble isLeft">
+          <span class="ctAvatar"><img src="images/zadankai04.png" alt=""></span>
+          <div class="ctBubbleBody">
+            <p class="ctBubbleText">※会話本文（要差し替え・原稿確認）</p>
+            <p class="ctBubbleName">Kさん</p>
+          </div>
+        </div>
+        <div class="ctBubble isRight">
+          <span class="ctAvatar"><img src="images/zadankai03.png" alt=""></span>
+          <div class="ctBubbleBody">
+            <p class="ctBubbleText">※会話本文（要差し替え・原稿確認）</p>
+            <p class="ctBubbleName">Mさん</p>
+          </div>
+        </div>
+        <div class="ctBubble isLeft">
+          <span class="ctAvatar"><img src="images/zadankai02.png" alt=""></span>
+          <div class="ctBubbleBody">
+            <p class="ctBubbleText">※会話本文（要差し替え・原稿確認）</p>
+            <p class="ctBubbleName">Sさん</p>
+          </div>
+        </div>
+        <div class="ctBubble isRight">
+          <span class="ctAvatar"><img src="images/zadankai01.png" alt=""></span>
+          <div class="ctBubbleBody">
+            <p class="ctBubbleText">※会話本文（要差し替え・原稿確認）</p>
+            <p class="ctBubbleName">Tさん</p>
+          </div>
+        </div>
+      </div>
+      <div class="ctPhotoRow"><div class="ctPhoto ctPhotoWide"><span>photo</span></div></div>
+    </section>
+
+    <!-- ===== 02 ===== -->
+    <section class="ctSection">
+      <div class="ctQHead"><span class="ctQLabel">question</span><span class="ctQNum">02</span></div>
+      <h2 class="ctQTitle">「入社後について教えてください」</h2>
+      <div class="ctQTitleBar" aria-hidden="true"></div>
+      <div class="ctTalk">
+        <div class="ctBubble isLeft">
+          <span class="ctAvatar"><img src="images/zadankai03.png" alt=""></span>
+          <div class="ctBubbleBody">
+            <p class="ctBubbleText">※会話本文（要差し替え・原稿確認）</p>
+            <p class="ctBubbleName">Mさん</p>
+          </div>
+        </div>
+        <div class="ctBubble isRight">
+          <span class="ctAvatar"><img src="images/zadankai01.png" alt=""></span>
+          <div class="ctBubbleBody">
+            <p class="ctBubbleText">※会話本文（要差し替え・原稿確認）</p>
+            <p class="ctBubbleName">Tさん</p>
+          </div>
+        </div>
+        <div class="ctBubble isLeft">
+          <span class="ctAvatar"><img src="images/zadankai04.png" alt=""></span>
+          <div class="ctBubbleBody">
+            <p class="ctBubbleText">※会話本文（要差し替え・原稿確認）</p>
+            <p class="ctBubbleName">Kさん</p>
+          </div>
+        </div>
+      </div>
+      <div class="ctPhotoRow">
+        <div class="ctPhoto"><span>photo</span></div>
+        <div class="ctPhoto"><span>photo</span></div>
+      </div>
+    </section>
+
+    <!-- ===== 03 ===== -->
+    <section class="ctSection">
+      <div class="ctQHead"><span class="ctQLabel">question</span><span class="ctQNum">03</span></div>
+      <h2 class="ctQTitle">「須田製版で働いて良かったことは？」</h2>
+      <div class="ctQTitleBar" aria-hidden="true"></div>
+      <div class="ctTalk">
+        <div class="ctBubble isLeft">
+          <span class="ctAvatar"><img src="images/zadankai01.png" alt=""></span>
+          <div class="ctBubbleBody">
+            <p class="ctBubbleText">※会話本文（要差し替え・原稿確認）</p>
+            <p class="ctBubbleName">Tさん</p>
+          </div>
+        </div>
+        <div class="ctBubble isRight">
+          <span class="ctAvatar"><img src="images/zadankai02.png" alt=""></span>
+          <div class="ctBubbleBody">
+            <p class="ctBubbleText">※会話本文（要差し替え・原稿確認）</p>
+            <p class="ctBubbleName">Sさん</p>
+          </div>
+        </div>
+        <div class="ctBubble isLeft">
+          <span class="ctAvatar"><img src="images/zadankai04.png" alt=""></span>
+          <div class="ctBubbleBody">
+            <p class="ctBubbleText">※会話本文（要差し替え・原稿確認）</p>
+            <p class="ctBubbleName">Kさん</p>
+          </div>
+        </div>
+      </div>
+      <div class="ctPhotoRow"><div class="ctPhoto ctPhotoWide"><span>photo</span></div></div>
+    </section>
+
+    <!-- ===== 04 ===== -->
+    <section class="ctSection">
+      <div class="ctQHead"><span class="ctQLabel">question</span><span class="ctQNum">04</span></div>
+      <h2 class="ctQTitle">「これから入社を考えている方へメッセージ」</h2>
+      <div class="ctQTitleBar" aria-hidden="true"></div>
+      <div class="ctTalk">
+        <div class="ctBubble isLeft">
+          <span class="ctAvatar"><img src="images/zadankai01.png" alt=""></span>
+          <div class="ctBubbleBody">
+            <p class="ctBubbleText">※メッセージ本文（要差し替え・原稿確認）</p>
+            <p class="ctBubbleName">Tさん</p>
+          </div>
+        </div>
+        <div class="ctBubble isLeft">
+          <span class="ctAvatar"><img src="images/zadankai02.png" alt=""></span>
+          <div class="ctBubbleBody">
+            <p class="ctBubbleText">※メッセージ本文（要差し替え・原稿確認）</p>
+            <p class="ctBubbleName">Sさん</p>
+          </div>
+        </div>
+        <div class="ctBubble isLeft">
+          <span class="ctAvatar"><img src="images/zadankai03.png" alt=""></span>
+          <div class="ctBubbleBody">
+            <p class="ctBubbleText">※メッセージ本文（要差し替え・原稿確認）</p>
+            <p class="ctBubbleName">Mさん</p>
+          </div>
+        </div>
+        <div class="ctBubble isLeft">
+          <span class="ctAvatar"><img src="images/zadankai04.png" alt=""></span>
+          <div class="ctBubbleBody">
+            <p class="ctBubbleText">※メッセージ本文（要差し替え・原稿確認）</p>
+            <p class="ctBubbleName">Kさん</p>
+          </div>
+        </div>
+      </div>
+      <div class="ctClosePhoto"><span>photo</span></div>
+    </section>
+
+    <a class="pillBtn backBtn" href="index.html"><span class="backBtnLabel">戻る</span></a>
+  </main>
+
+  <!-- 下部トンボ+CMYKストリップ(装飾・PCのみ) -->
+  <img class="bottomStrip pcOnly" src="images/bottomStrip.png" alt="" width="1597" height="81">
+
+  <!-- ===== フッター(index.htmlと共通) ===== -->
+  <footer class="footer" id="contact">
+    <div class="footerBrand">
+      <p class="footerLogo">
+        <img src="images/logoSuda.png" alt="株式会社 須田製版" width="207" height="44">
+        <span class="footerLogoEn">SUDA SEIHAN Co., Ltd.</span>
+      </p>
+      <a class="footerOfficialBtn" href="#" target="_blank" rel="noopener">須田製版公式サイト</a>
+      <p class="footerAddress">
+        ［代表］〒063-8603 北海道札幌市西区二十四軒2条6丁目1番8号<br>
+        <span class="footerAddressIndent">TEL：011-621-1000<br>
+        月〜金曜日・8:30 〜 17:30</span>
+      </p>
+    </div>
+
+    <nav class="footerNav" aria-label="フッターナビゲーション">
+      <div class="footerNavCol footerNavCol1">
+        <p class="footerNavHead"><a href="about.html">私たちの会社</a></p>
+        <ul class="footerNavList">
+          <li><a href="about.html">・採用メッセージ</a></li>
+          <li><a href="about.html">・経営理念</a></li>
+          <li><a href="about.html">・数字で見る須田製版</a></li>
+        </ul>
+      </div>
+      <div class="footerNavCol footerNavCol2">
+        <p class="footerNavHead"><a href="index.html#work">仕事・人を知る</a></p>
+        <p class="footerNavSub">営業職 / 制作職 / 工場職 / 管理部</p>
+        <ul class="footerNavList footerNavListIndent">
+          <li><a href="#">・社員インタビュー一覧</a></li>
+          <li><a href="crosstalk.html">・若手社員座談会</a></li>
+          <li><a href="#">・営業白書</a></li>
+        </ul>
+      </div>
+      <div class="footerNavCol footerNavCol3">
+        <p class="footerNavHead"><a href="recruit.html">募集要項</a></p>
+        <ul class="footerNavList">
+          <li><a href="recruit.html">・新卒募集</a></li>
+          <li><a href="recruit.html">・中途募集</a></li>
+          <li><a href="recruit.html">・福利厚生</a></li>
+        </ul>
+      </div>
+      <div class="footerNavCol footerNavCol4">
+        <p class="footerNavHead footerNavHeadFaq"><a href="faq.html">ＦＡＱ</a></p>
+        <p class="footerNavHead footerNavHeadContact"><a href="#contact">お問合せ</a></p>
+      </div>
+    </nav>
+  </footer>
+
+</div><!-- /.page -->
+</div><!-- /.pageScaler -->
+
+<script src="js/script.js"></script>
+</body>
+</html>
