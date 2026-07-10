@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>社員インタビュー K.T｜株式会社須田製版 採用サイト</title>
+  <meta name="description" content="株式会社須田製版の社員インタビュー。印刷職 K.T の仕事内容・1日のスケジュール・メンバーと接する時に心がけていること・仕事上で大切にしていること・プライベートをご紹介します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Maru+Gothic:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+  /* ===== ヒーロー(crosstalk.htmlと同じ方式: ベタ水色帯 + 装飾イラスト) ===== */
+  .subHero { position: relative; display: grid;
+    grid-template-columns: minmax(0,1fr); grid-template-rows: minmax(0,1fr); }
+  .subHero > * { grid-area: 1 / 1; min-width: 0; min-height: 0;
+    justify-self: start; align-self: start; position: relative; }
+  .ivHeroSpacer { width: 1600px; height: 262px; }
+  .subHero::before {
+    content: ""; position: absolute; z-index: -1; top: 0; height: 204px;
+    left: 0; right: 0; background: #ace5fc; pointer-events: none;
+  }
+  .subHeroTitle { margin: 60px 0 0 325px; font-family: var(--fontMaru);
+    font-size: 56px; font-weight: 400; line-height: 1; letter-spacing: 0.28em;
+    color: #fff; text-shadow: 3px 4px 7px rgba(90,130,160,0.35); }
+  .ivHeroSub { margin: 140px 0 0 330px; font-family: var(--fontMaru);
+    font-size: 22px; font-weight: 500; letter-spacing: 0.22em; color: #fff; }
+  .breadcrumb { margin: 226px 0 0 330px; font-size: 21px; font-weight: 500;
+    letter-spacing: 0.1em; color: var(--colorBrand); }
+  .ivHeroArt { position: absolute; top: 0; right: 0; width: 860px; height: 204px;
+    pointer-events: none; z-index: 0; }
+
+  /* 本文の方眼紙背景を右だけ画面端まで延長 */
+  .subMain { position: relative; background-color: transparent; background-image: none; }
+  .subMain::before {
+    content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 0;
+    right: -58.3px; background-color: var(--colorPaper);
+    background-image:
+      repeating-linear-gradient(to right, rgba(90,204,249,0.085) 0 2px, transparent 2px 35.75px),
+      repeating-linear-gradient(to bottom, rgba(90,204,249,0.085) 0 2px, transparent 2px 35.75px);
+    pointer-events: none;
+  }
+  .subMain::after {
+    content: ""; position: absolute; z-index: 1; top: 0; left: -58.3px;
+    width: 1600px; height: 26px; pointer-events: none;
+    background-image: linear-gradient(#111,#111), linear-gradient(#111,#111),
+      linear-gradient(#111,#111), linear-gradient(#111,#111);
+    background-repeat: no-repeat;
+    background-position: 58px 0, 0 20px, 1499px 0, 1547px 0;
+    background-size: 1px 20px, 58px 1px, 97px 1px, 1px 18px;
+  }
+  @media (min-width: 1600px) {
+    .subHero::before { left: calc((1600px - 100vw) / 2); right: calc((1600px - 100vw) / 2); }
+    .subMain::before { right: calc(741.7px - 50vw); }
+  }
+
+  /* ===== プロフィール ===== */
+  .ivProfile { width: 1300px; margin: 46px auto 0; display: flex; gap: 54px; align-items: flex-start; }
+  .ivProfilePhoto { flex: none; width: 675px; }
+  .ivProfilePhoto img { width: 100%; height: auto; display: block; }
+  .ivProfileInfo { flex: 1; padding-top: 4px; }
+  .ivTag { text-align: right; margin: 0 0 22px; }
+  .ivTag span { display: inline-block; padding: 6px 22px; background: var(--colorYellow);
+    border-radius: 4px; font-size: 15px; font-weight: 700; letter-spacing: 0.08em; color: var(--colorText); }
+  .ivPill { display: inline-block; padding: 9px 30px; background: var(--colorBrand); color: #fff;
+    border-radius: 22px; font-size: 17px; font-weight: 700; letter-spacing: 0.08em; }
+  .ivName { margin-top: 22px; padding-bottom: 16px; font-size: 34px; font-weight: 700;
+    letter-spacing: 0.04em; color: var(--colorText); border-bottom: 1.5px solid var(--colorCyan); }
+  .ivName span { font-size: 23px; margin-left: 8px; }
+  .ivMeta { margin-top: 18px; font-size: 16px; line-height: 1.75; color: var(--colorText); }
+
+  /* ===== 2カラム本文セクション ===== */
+  .ivSection { width: 1000px; margin: 76px auto 0; display: flex; gap: 46px; align-items: flex-start; }
+  .ivSection.rev { flex-direction: row-reverse; }
+  .ivBody { flex: 1 1 0; min-width: 0; }
+  .ivFig { flex: none; width: 480px; }
+  .ivFig img { width: 100%; height: auto; display: block; border-radius: 2px; }
+  .ivFigCap { margin-top: 8px; font-size: 12px; color: #777; }
+  .ivColTitle { text-align: center; font-size: 22px; font-weight: 700; letter-spacing: 0.06em;
+    color: var(--colorText); padding-bottom: 14px; border-bottom: 1px solid #9ec7e0; }
+  .ivText { margin-top: 22px; font-size: 15px; line-height: 2.0; letter-spacing: 0.03em;
+    color: var(--colorText); text-align: justify; }
+
+  /* ===== 1日のスケジュール ===== */
+  .ivSchedule { width: 1160px; margin: 78px auto 0; background: #fcfcfa; border: 1px solid #e6e6de;
+    border-radius: 8px; padding: 40px 66px 30px; box-shadow: 0 3px 14px rgba(80,120,150,0.06); }
+  .ivSchedTitle { display: flex; align-items: center; justify-content: center; gap: 22px;
+    font-size: 22px; font-weight: 700; letter-spacing: 0.12em; color: var(--colorText); }
+  .ivSchedTitle::before, .ivSchedTitle::after { content: ""; width: 200px; max-width: 22%;
+    border-top: 2px dashed #6fb2df; }
+  .ivSchedGrid { margin-top: 36px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 80px; }
+  .ivSchedCol { min-width: 0; }
+  .ivSchedItem { position: relative; display: grid; grid-template-columns: 22px 78px 1fr;
+    column-gap: 14px; padding-bottom: 40px; }
+  .ivSchedCol .ivSchedItem:last-child { padding-bottom: 4px; }
+  /* ドット間をつなぐ縦線 */
+  .ivSchedItem::before { content: ""; position: absolute; z-index: 0; left: 10px; top: 20px;
+    bottom: -2px; width: 2px; background: #ddd; display: none; }
+  .ivSchedItem.lPink::before { display: block; background: var(--colorPink); opacity: 0.6; }
+  .ivSchedItem.lCyan::before { display: block; background: var(--colorCyan); opacity: 0.75; }
+  /* ドット(カラーのリング) */
+  .ivDot { position: relative; z-index: 1; box-sizing: border-box; width: 16px; height: 16px;
+    margin-top: 3px; border-radius: 50%; background: #fff; }
+  .ivDot.cPink { border: 4px solid var(--colorPink); }
+  .ivDot.cCyan { border: 4px solid var(--colorCyan); }
+  .ivDot.cYellow { border: 4px solid var(--colorYellow); }
+  .ivSchedLabel b { display: block; font-size: 16px; font-weight: 700; letter-spacing: 0.02em; color: var(--colorText); }
+  .ivSchedLabel small { display: block; margin-top: 3px; font-size: 13px; color: var(--colorText); }
+  .ivSchedDesc { padding-top: 1px; font-size: 14px; line-height: 1.9; color: var(--colorText); }
+
+  /* ===== 他メンバー(社員インタビュー一覧 / index.htmlの memberList を流用) ===== */
+  .ivInterviewList { position: relative; margin-top: 80px; padding: 46px 0 34px; overflow: hidden; }
+  .ivInterviewList::before { content: ""; position: absolute; z-index: 0; left: 0; right: 0; top: 96px;
+    height: 300px; background: url(images/squigglePink.png) center / 2500px 300px no-repeat; pointer-events: none; }
+  .ivInterviewList .memberList { position: relative; z-index: 1; margin: 0; justify-content: center; }
+
+  /* ===== SP ===== */
+  @media (max-width: 767px) {
+    .ivHeroSpacer { width: 100%; height: auto; aspect-ratio: 1600 / 300; }
+    .subHeroTitle { margin: 6% 0 0 6%; font-size: 26px; }
+    .ivHeroSub { margin: 17% 0 0 6%; font-size: 13px; }
+    .breadcrumb { margin: 27% 0 0 5%; font-size: 12px; }
+    .ivHeroArt { display: none; }
+    .subMain::after { display: none; }
+    .subMain::before { right: 0; }
+    .ivProfile { width: auto; margin: 24px 16px 0; flex-direction: column; gap: 22px; }
+    .ivProfilePhoto { width: 100%; }
+    .ivSection { width: auto; margin: 44px 16px 0; flex-direction: column !important; gap: 20px; }
+    .ivFig { width: 100%; }
+    .ivSchedule { width: auto; margin: 44px 16px 0; padding: 28px 20px 10px; }
+    .ivSchedTitle { font-size: 18px; gap: 12px; }
+    .ivSchedTitle::before, .ivSchedTitle::after { width: 30px; }
+    .ivSchedGrid { grid-template-columns: 1fr; gap: 0; }
+    .ivInterviewList { margin-top: 40px; padding: 0; }
+    .ivInterviewList::before { display: none; }
+  }
+  </style>
+</head>
+<body class="subPage interviewPage">
+
+<!-- ===== SP用ヘッダー(768px未満のみ表示) ===== -->
+<header class="spHeader">
+  <p class="spHeaderLogo">
+    <a href="../index.html"><img src="../images/logoSuda.png" alt="株式会社 須田製版 採用サイト" width="207" height="44"></a>
+  </p>
+  <button class="spMenuBtn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="spDrawer">
+    <span class="spMenuBtnBar"></span>
+    <span class="spMenuBtnBar"></span>
+    <span class="spMenuBtnBar"></span>
+  </button>
+</header>
+
+<nav class="spDrawer" id="spDrawer" aria-label="グローバルナビゲーション(モバイル)">
+  <ul class="spDrawerList">
+    <li><a href="../about.html">私たちの会社</a></li>
+    <li><a href="../index.html#work">仕事・人を知る</a></li>
+    <li><a href="../recruit.html">募集要項</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+    <li><a href="../faq.html">FAQ</a></li>
+  </ul>
+  <a class="officialSiteBtn spDrawerOfficialBtn" href="#" target="_blank" rel="noopener">須田製版公式サイト</a>
+</nav>
+
+<div class="pageScaler">
+<div class="page">
+
+  <!-- ===== 下層ヘッダー ===== -->
+  <header class="subHeader">
+    <p class="subHeaderLogo">
+      <a href="../index.html"><img src="../images/logoSuda.png" alt="株式会社 須田製版" width="207" height="44"></a>
+      <span class="subHeaderCaption">採用サイト</span>
+    </p>
+    <ul class="subNavList">
+      <li><a href="../about.html">私たちの会社</a></li>
+      <li><a href="../index.html#work">仕事を知る</a></li>
+      <li><a href="../index.html#interview">人を知る</a></li>
+      <li><a href="../recruit.html">募集要項</a></li>
+      <li><a href="../faq.html">FAQ</a></li>
+      <li><a href="#contact">お問合せ</a></li>
+    </ul>
+    <a class="officialSiteBtn subHeaderOfficialBtn" href="#" target="_blank" rel="noopener">須田製版公式サイト</a>
+  </header>
+
+  <!-- ===== ヒーロー帯 ===== -->
+  <div class="subHero">
+    <div class="ivHeroSpacer" aria-hidden="true"></div>
+    <img class="ivHeroArt" src="../images/heroInterviewList.png" alt="" aria-hidden="true" width="860" height="204">
+    <h1 class="subHeroTitle">人を知る</h1>
+    <p class="ivHeroSub">社員インタビュー</p>
+    <p class="breadcrumb"><a href="../index.html">TOP</a><span class="breadcrumbSep">＞</span><a href="../index.html#work">仕事・人を知る</a></p>
+  </div>
+
+  <!-- ===== メイン ===== -->
+  <main class="subMain">
+
+    <!-- プロフィール -->
+    <div class="ivProfile">
+      <div class="ivProfilePhoto"><img src="../images/interview_kt_main.jpg" alt="K.Tさん" width="675" height="439"></div>
+      <div class="ivProfileInfo">
+        <p class="ivTag"><span>2026年　取材当時</span></p>
+        <p class="ivPill">札幌発寒工場　印刷部　輪転印刷課</p>
+        <p class="ivName">K.T<span>30代</span></p>
+        <p class="ivMeta">2013年入社</p>
+        <p class="ivMeta">北海道小樽工業高校　電子機械科<br>2005年卒</p>
+      </div>
+    </div>
+
+    <!-- 私の仕事内容 (テキスト左 / 写真右) -->
+    <section class="ivSection">
+      <div class="ivBody">
+        <h2 class="ivColTitle">私の仕事内容</h2>
+        <p class="ivText">私の仕事は印刷オペレーターといい印刷機を操作して、紙に印刷する仕事をしています。自分が所属している輪転印刷課ではチラシを主体とするB輪と、雑誌やパンフレットを主体とするA輪があり、私はB輪のチラシをメインに仕事をしています。仕事の流れとしましては、営業がお客様より依頼を受けた内容を作業指示書として起こしてもらい、作業指示書をもとにインクなどの資材や刷版の確認、印刷機械の準備をして印刷となります。お客様の求めている製品になる様、色出しを行っており、それに伴い印刷機械の整備も重要になってくる為、少しでも時間が空いたら機械のメンテナンス作業をしています。</p>
+      </div>
+      <div class="ivFig"><img src="../images/interview_kt_sub01.jpg" alt="コンソールで色を確認するK.Tさん" width="390" height="318"></div>
+    </section>
+
+    <!-- 1日のスケジュール -->
+    <div class="ivSchedule">
+      <p class="ivSchedTitle">1日のスケジュール</p>
+      <div class="ivSchedGrid">
+        <div class="ivSchedCol">
+          <div class="ivSchedItem lPink">
+            <span class="ivDot cPink"></span>
+            <div class="ivSchedLabel"><b>8:30</b><small>出社</small></div>
+            <p class="ivSchedDesc">機械の印刷準備・印刷予定表の確認・メンバーと共有。</p>
+          </div>
+          <div class="ivSchedItem lPink">
+            <span class="ivDot cPink"></span>
+            <div class="ivSchedLabel"><b>9:00</b><small>印刷</small></div>
+            <p class="ivSchedDesc">当日発送や急ぎの物件を優先的に印刷。</p>
+          </div>
+          <div class="ivSchedItem">
+            <span class="ivDot cYellow"></span>
+            <div class="ivSchedLabel"><b>12:00</b><small>ランチ</small></div>
+            <p class="ivSchedDesc">1時間の休憩。</p>
+          </div>
+        </div>
+        <div class="ivSchedCol">
+          <div class="ivSchedItem lCyan">
+            <span class="ivDot cCyan"></span>
+            <div class="ivSchedLabel"><b>13:00</b><small>発注・印刷</small></div>
+            <p class="ivSchedDesc">翌日の予定を確認し、資材の発注がないか確認。</p>
+          </div>
+          <div class="ivSchedItem">
+            <span class="ivDot cCyan"></span>
+            <div class="ivSchedLabel"><b>17:30</b><small>退勤</small></div>
+            <p class="ivSchedDesc">2交代制なので、夜勤へ注意事項など申し送りを作成し退勤。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- メンバーと接する時に心がけていること (写真左 / テキスト右) -->
+    <section class="ivSection rev">
+      <div class="ivBody">
+        <h2 class="ivColTitle">メンバーと接する時に心がけていること</h2>
+        <p class="ivText">まず挨拶を絶対にし相手の話しを聞く事や、普段と様子が違う場合「何かありましたか？大丈夫ですか？」と声をかけること意識しています。そこから何気ない日常会話をしたり等、普段は常に機械が稼働していて緊張感がある中で、少しでもリラックスして仕事が取り組める職場を目指しています。最近はジェネレーションギャップを感じながらも、少しでも若い後輩達が働きやすく働き甲斐のある職場に出来る様、課員全員で頑張っています。</p>
+      </div>
+      <div class="ivFig"><img src="../images/interview_kt_sub02.jpg" alt="巻取紙を準備するK.Tさん" width="479" height="319"></div>
+    </section>
+
+    <!-- 仕事上で大切にしていること (テキスト左 / 写真右) -->
+    <section class="ivSection">
+      <div class="ivBody">
+        <h2 class="ivColTitle">仕事上で大切にしていること</h2>
+        <p class="ivText">私は中途採用ということもあり、畑違いの職場から須田製版に入社させていただきました。右も左も分からない私に親身になり指導し成長させてくれた上司の様に、今度は私が後輩達にこれまで培った知識や技術を継承していき、この環境がずっと継続し須田製版というブランドが「最高の品質」でお客様の納得のいく製品を作り続けられるようにしていきたいと思います。</p>
+      </div>
+      <div class="ivFig"><img src="../images/interview_kt_sub03.jpg" alt="輪転機を点検するK.Tさん" width="498" height="318"></div>
+    </section>
+
+    <!-- プライベートの話 (写真左 / テキスト右) -->
+    <section class="ivSection rev">
+      <div class="ivBody">
+        <h2 class="ivColTitle">プライベートの話</h2>
+        <p class="ivText">娘も小学校5年生になり様々なものに興味を持つようになり、YouTubeを見たりお化粧をしたりと私達が小さかった頃とは全然違うんだなと日々痛感しています。買い物に行くと妻がウィンドウショッピング等している際に、娘と一緒にゲームセンターに行き「maimai でらっくす」というリズムゲームにハマっています。上手に出来る訳ではありませんが楽しんでいる娘の顔を見れるだけで、癒されています。</p>
+      </div>
+      <div class="ivFig">
+        <img src="../images/interview_kt_pv.jpg" alt="娘とよく行くゲームセンター" width="487" height="356">
+        <p class="ivFigCap">本人撮影</p>
+      </div>
+    </section>
+
+    <!-- 他メンバー(社員インタビュー一覧 / index.htmlのパーツを流用) -->
+    <div class="ivInterviewList">
+      <ul class="memberList">
+        <li class="memberItem memberMiura">
+          <a href="#"><img src="../images/memberMiura.png" alt="社員インタビュー：営業" width="314" height="295"></a>
+        </li>
+        <li class="memberItem memberKojima">
+          <a href="#"><img src="../images/memberKojima.png" alt="社員インタビュー：営業" width="314" height="295"></a>
+        </li>
+        <li class="memberItem memberTakada">
+          <a href="#"><img src="../images/memberTakada.png" alt="社員インタビュー：営業 課長補佐" width="318" height="295"></a>
+        </li>
+        <li class="memberItem memberIrie">
+          <a href="#"><img src="../images/memberIrie.png" alt="社員インタビュー：制作 次長" width="314" height="300"></a>
+        </li>
+        <li class="memberItem memberChida">
+          <a href="#"><img src="../images/memberChida.png" alt="社員インタビュー：制作 課長補佐" width="317" height="295"></a>
+        </li>
+      </ul>
+    </div>
+
+    <a class="pillBtn backBtn" href="../index.html#interview"><span class="backBtnLabel">戻る</span></a>
+  </main>
+
+  <!-- 下部トンボ+CMYKストリップ(装飾・PCのみ) -->
+  <img class="bottomStrip pcOnly" src="../images/bottomStrip.png" alt="" width="1597" height="81">
+
+  <!-- ===== フッター(index.htmlと共通) ===== -->
+  <footer class="footer" id="contact">
+    <div class="footerBrand">
+      <p class="footerLogo">
+        <img src="../images/logoSuda.png" alt="株式会社 須田製版" width="207" height="44">
+        <span class="footerLogoEn">SUDA SEIHAN Co., Ltd.</span>
+      </p>
+      <a class="footerOfficialBtn" href="#" target="_blank" rel="noopener">須田製版公式サイト</a>
+      <p class="footerAddress">
+        ［代表］〒063-8603 北海道札幌市西区二十四軒2条6丁目1番8号<br>
+        <span class="footerAddressIndent">TEL：011-621-1000<br>
+        月〜金曜日・8:30 〜 17:30</span>
+      </p>
+    </div>
+
+    <nav class="footerNav" aria-label="フッターナビゲーション">
+      <div class="footerNavCol footerNavCol1">
+        <p class="footerNavHead"><a href="../about.html">私たちの会社</a></p>
+        <ul class="footerNavList">
+          <li><a href="../about.html">・採用メッセージ</a></li>
+          <li><a href="../about.html">・経営理念</a></li>
+          <li><a href="../about.html">・数字で見る須田製版</a></li>
+        </ul>
+      </div>
+      <div class="footerNavCol footerNavCol2">
+        <p class="footerNavHead"><a href="../index.html#work">仕事・人を知る</a></p>
+        <p class="footerNavSub">営業職 / 制作職 / 工場職 / 管理部</p>
+        <ul class="footerNavList footerNavListIndent">
+          <li><a href="index.html">・社員インタビュー一覧</a></li>
+          <li><a href="../crosstalk.html">・若手社員座談会</a></li>
+          <li><a href="#">・営業白書</a></li>
+        </ul>
+      </div>
+      <div class="footerNavCol footerNavCol3">
+        <p class="footerNavHead"><a href="../recruit.html">募集要項</a></p>
+        <ul class="footerNavList">
+          <li><a href="../recruit.html">・新卒募集</a></li>
+          <li><a href="../recruit.html">・中途募集</a></li>
+          <li><a href="../recruit.html">・福利厚生</a></li>
+        </ul>
+      </div>
+      <div class="footerNavCol footerNavCol4">
+        <p class="footerNavHead footerNavHeadFaq"><a href="../faq.html">ＦＡＱ</a></p>
+        <p class="footerNavHead footerNavHeadContact"><a href="#contact">お問合せ</a></p>
+      </div>
+    </nav>
+  </footer>
+
+</div><!-- /.page -->
+</div><!-- /.pageScaler -->
+
+<script src="../js/script.js"></script>
+</body>
+</html>
