@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>仕事・人を知る｜株式会社須田製版 採用サイト</title>
+  <meta name="description" content="株式会社須田製版の仕事の流れ(営業・制作・印刷・加工物流・総務)と、社員インタビュー一覧をご紹介します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Maru+Gothic:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+  /* ===== ヒーロー(crosstalk.html/nm.htmlと同じ方式: ベタ水色帯 + 装飾イラスト) ===== */
+  .subHero { position: relative; display: grid;
+    grid-template-columns: minmax(0,1fr); grid-template-rows: minmax(0,1fr); }
+  .subHero > * { grid-area: 1 / 1; min-width: 0; min-height: 0;
+    justify-self: start; align-self: start; position: relative; }
+  .iwHeroSpacer { width: 1600px; height: 262px; }
+  .subHero::before {
+    content: ""; position: absolute; z-index: -1; top: 0; height: 204px;
+    left: 0; right: 0; background: #ace5fc; pointer-events: none;
+  }
+  .subHeroTitle { margin: 60px 0 0 325px; font-family: var(--fontMaru);
+    font-size: 56px; font-weight: 400; line-height: 1; letter-spacing: 0.28em;
+    color: #fff; text-shadow: 3px 4px 7px rgba(90,130,160,0.35); }
+  .breadcrumb { margin: 226px 0 0 330px; font-size: 21px; font-weight: 500;
+    letter-spacing: 0.1em; color: var(--colorBrand); }
+  .iwHeroArt { position: absolute; top: 0; left: 0; width: 1600px; height: 262px;
+    pointer-events: none; z-index: 0; }
+
+  /* 本文の方眼紙背景を右だけ画面端まで延長 */
+  .subMain { position: relative; background-color: transparent; background-image: none; }
+  .subMain::before {
+    content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 0;
+    right: -58.3px; background-color: var(--colorPaper);
+    background-image:
+      repeating-linear-gradient(to right, rgba(90,204,249,0.085) 0 2px, transparent 2px 35.75px),
+      repeating-linear-gradient(to bottom, rgba(90,204,249,0.085) 0 2px, transparent 2px 35.75px);
+    pointer-events: none;
+  }
+  .subMain::after {
+    content: ""; position: absolute; z-index: 1; top: 0; left: -58.3px;
+    width: 1600px; height: 26px; pointer-events: none;
+    background-image: linear-gradient(#111,#111), linear-gradient(#111,#111),
+      linear-gradient(#111,#111), linear-gradient(#111,#111);
+    background-repeat: no-repeat;
+    background-position: 58px 0, 0 20px, 1499px 0, 1547px 0;
+    background-size: 1px 20px, 58px 1px, 97px 1px, 1px 18px;
+  }
+  @media (min-width: 1600px) {
+    .subHero::before { left: calc((1600px - 100vw) / 2); right: calc((1600px - 100vw) / 2); }
+    .subMain::before { right: calc(741.7px - 50vw); }
+  }
+
+  /* ===== Work process(index.htmlの .work を流用、絶対配置だけ解除) ===== */
+  .iwWork.work { position: relative; top: auto; left: auto; width: auto; margin: 56px auto 0; }
+
+  /* ===== Interview(index.htmlの .interview/.memberList を流用) =====
+     .interview はベースで display:grid のグリッドスタック(子要素を全部
+     同じセルに重ねる)方式のため、複数カテゴリを縦に並べたいこのページでは
+     display:block に上書きして通常のブロック積みに戻す */
+  .iwInterview.interview { display: block; position: relative; top: auto; left: auto; width: auto; margin: 90px auto 0; }
+  .iwInterview.interview > * { grid-area: auto; position: static; justify-self: auto; align-self: auto; }
+  .iwCategory { position: relative; margin-top: 54px; }
+  .iwCategory:first-child { margin-top: 0; }
+  .iwCategoryTitle { font-size: 20px; font-weight: 700; letter-spacing: 0.08em; color: var(--colorBrand); }
+  .iwCategoryRow { position: relative; margin-top: 22px; min-height: 1px; }
+  .iwCategoryRow.hasSquiggle::before {
+    content: ""; position: absolute; z-index: 0; left: -30px; top: 20px;
+    width: 900px; height: 170px; background: url(../images/squigglePink.png) left center / 900px 170px no-repeat;
+    pointer-events: none;
+  }
+  .iwMemberCard { position: relative; z-index: 1; display: inline-flex; flex-direction: column;
+    align-items: center; width: 172px; text-decoration: none; }
+  .iwMemberPhoto { width: 150px; height: 150px; border-radius: 50%; overflow: hidden;
+    background: #dfe6ea; border: 4px solid #fff; box-shadow: 0 4px 12px rgba(60,90,120,0.18);
+    transition: transform 0.25s; }
+  .iwMemberCard:hover .iwMemberPhoto { transform: scale(1.04); }
+  .iwMemberPhoto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .iwMemberName { margin-top: 10px; font-size: 14px; font-weight: 700; color: var(--colorText); }
+  .iwMemberRole { margin-top: 2px; font-size: 12px; color: #777; }
+
+  /* ===== 若手座談会カード(index.htmlの .crossTalk を流用) ===== */
+  .iwCrossTalkWrap { width: 100%; max-width: 1350px; margin: 86px auto 0; }
+  .iwCrossTalkWrap .crossTalk { margin: 0 auto; }
+
+  @media (max-width: 767px) {
+    .iwHeroSpacer { width: 100%; height: auto; aspect-ratio: 1600 / 300; }
+    .subHeroTitle { margin: 6% 0 0 6%; font-size: 26px; }
+    .breadcrumb { margin: 27% 0 0 5%; font-size: 12px; }
+    .iwHeroArt { display: none; }
+    .subMain::after { display: none; }
+    .subMain::before { right: 0; }
+    .iwWork.work { margin-top: 40px; }
+    .iwInterview.interview { margin-top: 50px; }
+    .iwCategory { margin-top: 40px; padding: 0 16px; }
+    .iwCategoryRow.hasSquiggle::before { display: none; }
+    .iwCrossTalkWrap { margin-top: 50px; padding: 0 16px; }
+  }
+  </style>
+</head>
+<body class="subPage interviewListPage">
+
+<!-- ===== SP用ヘッダー(768px未満のみ表示) ===== -->
+<header class="spHeader">
+  <p class="spHeaderLogo">
+    <a href="../index.html"><img src="../images/logoSuda.png" alt="株式会社 須田製版 採用サイト" width="207" height="44"></a>
+  </p>
+  <button class="spMenuBtn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="spDrawer">
+    <span class="spMenuBtnBar"></span>
+    <span class="spMenuBtnBar"></span>
+    <span class="spMenuBtnBar"></span>
+  </button>
+</header>
+
+<nav class="spDrawer" id="spDrawer" aria-label="グローバルナビゲーション(モバイル)">
+  <ul class="spDrawerList">
+    <li><a href="../about.html">私たちの会社</a></li>
+    <li><a href="../index.html#work">仕事・人を知る</a></li>
+    <li><a href="../recruit.html">募集要項</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+    <li><a href="../faq.html">FAQ</a></li>
+  </ul>
+  <a class="officialSiteBtn spDrawerOfficialBtn" href="#" target="_blank" rel="noopener">須田製版公式サイト</a>
+</nav>
+
+<div class="pageScaler">
+<div class="page">
+
+  <!-- ===== 下層ヘッダー ===== -->
+  <header class="subHeader">
+    <p class="subHeaderLogo">
+      <a href="../index.html"><img src="../images/logoSuda.png" alt="株式会社 須田製版" width="207" height="44"></a>
+      <span class="subHeaderCaption">採用サイト</span>
+    </p>
+    <ul class="subNavList">
+      <li><a href="../about.html">私たちの会社</a></li>
+      <li><a href="../index.html#work">仕事を知る</a></li>
+      <li><a href="../index.html#interview">人を知る</a></li>
+      <li><a href="../recruit.html">募集要項</a></li>
+      <li><a href="../faq.html">FAQ</a></li>
+      <li><a href="#contact">お問合せ</a></li>
+    </ul>
+    <a class="officialSiteBtn subHeaderOfficialBtn" href="#" target="_blank" rel="noopener">須田製版公式サイト</a>
+  </header>
+
+  <!-- ===== ヒーロー帯 ===== -->
+  <div class="subHero">
+    <div class="iwHeroSpacer" aria-hidden="true"></div>
+    <img class="iwHeroArt" src="../images/heroWorkArt.png" alt="" aria-hidden="true" width="1600" height="262">
+    <h1 class="subHeroTitle">仕事・人を知る</h1>
+    <p class="breadcrumb"><a href="../index.html">TOP</a><span class="breadcrumbSep">＞</span>仕事・人を知る</p>
+  </div>
+
+  <!-- ===== メイン ===== -->
+  <main class="subMain">
+
+    <!-- ===== Work process(index.htmlのパーツを流用) ===== -->
+    <section class="work iwWork">
+      <h2 class="sectionTitle workTitle">Work process</h2>
+
+      <div class="isomeScroller">
+        <img class="isomeIllust" src="../images/isomeIllust.png"
+             alt="仕事の流れ：01 営業 → 02 制作 → 03 印刷 → 04 加工・物流。総務が全体を支え、できたものがお客様のもとへ届きます。"
+             width="1409" height="879">
+      </div>
+      <p class="isomeScrollNote" aria-hidden="true">← 横にスクロールできます →</p>
+
+      <ul class="workSpotList">
+        <li><button type="button" class="workSpot workSpotEigyo" data-modal="modalEigyo"><span class="workSpotNum">01</span>営業</button></li>
+        <li><button type="button" class="workSpot workSpotSeisaku" data-modal="modalSeisaku"><span class="workSpotNum">02</span>制作</button></li>
+        <li><button type="button" class="workSpot workSpotInsatsu" data-modal="modalInsatsu"><span class="workSpotNum">03</span>印刷</button></li>
+        <li><button type="button" class="workSpot workSpotKako" data-modal="modalKako"><span class="workSpotNum">04</span>加工・物流</button></li>
+        <li><button type="button" class="workSpot workSpotSoumu" data-modal="modalSoumu">総務</button></li>
+        <li><button type="button" class="workSpot workSpotDekita" data-modal="modalDekita">できたもの</button></li>
+      </ul>
+    </section>
+
+    <!-- ===== Interview(カテゴリ別一覧・現時点ではnm.htmlのみ掲載) ===== -->
+    <section class="interview iwInterview">
+      <h2 class="sectionTitle interviewTitle">Interview</h2>
+
+      <div class="iwCategory">
+        <p class="iwCategoryTitle">営業</p>
+        <div class="iwCategoryRow hasSquiggle">
+          <a class="iwMemberCard" href="nm.html">
+            <span class="iwMemberPhoto"><img src="../images/interview_nm_avatar.jpg" alt=""></span>
+            <span class="iwMemberName">N.M</span>
+            <span class="iwMemberRole">営業部</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="iwCategory">
+        <p class="iwCategoryTitle">制作</p>
+        <div class="iwCategoryRow"></div>
+      </div>
+
+      <div class="iwCategory">
+        <p class="iwCategoryTitle">印刷</p>
+        <div class="iwCategoryRow"></div>
+      </div>
+
+      <div class="iwCategory">
+        <p class="iwCategoryTitle">総務</p>
+        <div class="iwCategoryRow"></div>
+      </div>
+    </section>
+
+    <!-- 若手座談会(index.htmlのパーツを流用) -->
+    <div class="iwCrossTalkWrap">
+      <div class="crossTalk">
+        <img class="crossTalkCard" src="../images/crossTalkCard.png" alt="" width="802" height="280">
+        <img class="crossTalkPaperclip" src="../images/paperclip.png" alt="" width="121" height="149">
+        <img class="crossTalkPhoto crossTalkPhoto04" src="../images/zadankai04.png" alt="若手社員" width="102" height="212">
+        <img class="crossTalkPhoto crossTalkPhoto03" src="../images/zadankai03.png" alt="若手社員" width="107" height="198">
+        <img class="crossTalkPhoto crossTalkPhoto02" src="../images/zadankai02.png" alt="若手社員" width="97" height="205">
+        <img class="crossTalkPhoto crossTalkPhoto01" src="../images/zadankai01.png" alt="若手社員" width="101" height="208">
+        <a class="crossTalkTitle" href="../crosstalk.html">
+          <img src="../images/crossTalkTitle.png" alt="若手座談会 CROSS TALK" width="350" height="77">
+        </a>
+        <p class="crossTalkText">若手社員と<br>コーヒーブレイク</p>
+        <img class="crossTalkSticky crossTalkStickyLeft" src="../images/stickyLeft.png" alt="付箋：入社後について" width="261" height="72">
+        <img class="crossTalkSticky crossTalkStickyRight" src="../images/stickyRight.png" alt="付箋：須田製版で働いて良かったことは？" width="261" height="71">
+      </div>
+    </div>
+
+    <a class="pillBtn backBtn" href="../index.html"><span class="backBtnLabel">戻る</span></a>
+  </main>
+
+  <!-- 下部トンボ+CMYKストリップ(装飾・PCのみ) -->
+  <img class="bottomStrip pcOnly" src="../images/bottomStrip.png" alt="" width="1597" height="81">
+
+  <!-- ===== フッター(index.htmlと共通) ===== -->
+  <footer class="footer" id="contact">
+    <div class="footerBrand">
+      <p class="footerLogo">
+        <img src="../images/logoSuda.png" alt="株式会社 須田製版" width="207" height="44">
+        <span class="footerLogoEn">SUDA SEIHAN Co., Ltd.</span>
+      </p>
+      <a class="footerOfficialBtn" href="#" target="_blank" rel="noopener">須田製版公式サイト</a>
+      <p class="footerAddress">
+        ［代表］〒063-8603 北海道札幌市西区二十四軒2条6丁目1番8号<br>
+        <span class="footerAddressIndent">TEL：011-621-1000<br>
+        月〜金曜日・8:30 〜 17:30</span>
+      </p>
+    </div>
+
+    <nav class="footerNav" aria-label="フッターナビゲーション">
+      <div class="footerNavCol footerNavCol1">
+        <p class="footerNavHead"><a href="../about.html">私たちの会社</a></p>
+        <ul class="footerNavList">
+          <li><a href="../about.html">・採用メッセージ</a></li>
+          <li><a href="../about.html">・経営理念</a></li>
+          <li><a href="../about.html">・数字で見る須田製版</a></li>
+        </ul>
+      </div>
+      <div class="footerNavCol footerNavCol2">
+        <p class="footerNavHead"><a href="../index.html#work">仕事・人を知る</a></p>
+        <p class="footerNavSub">営業職 / 制作職 / 工場職 / 管理部</p>
+        <ul class="footerNavList footerNavListIndent">
+          <li><a href="index.html">・社員インタビュー一覧</a></li>
+          <li><a href="../crosstalk.html">・若手社員座談会</a></li>
+          <li><a href="#">・営業白書</a></li>
+        </ul>
+      </div>
+      <div class="footerNavCol footerNavCol3">
+        <p class="footerNavHead"><a href="../recruit.html">募集要項</a></p>
+        <ul class="footerNavList">
+          <li><a href="../recruit.html">・新卒募集</a></li>
+          <li><a href="../recruit.html">・中途募集</a></li>
+          <li><a href="../recruit.html">・福利厚生</a></li>
+        </ul>
+      </div>
+      <div class="footerNavCol footerNavCol4">
+        <p class="footerNavHead footerNavHeadFaq"><a href="../faq.html">ＦＡＱ</a></p>
+        <p class="footerNavHead footerNavHeadContact"><a href="#contact">お問合せ</a></p>
+      </div>
+    </nav>
+  </footer>
+
+</div><!-- /.page -->
+</div><!-- /.pageScaler -->
+
+<!-- ===== 全画面モーダル(Work processのイラスト拡大表示) ===== -->
+<div class="modal" id="siteModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="siteModalCaption">
+  <div class="modalOverlay" data-modal-close></div>
+  <figure class="modalBody">
+    <button type="button" class="modalClose" aria-label="閉じる" data-modal-close></button>
+    <img class="modalImage" src="" alt="" id="siteModalImage">
+    <figcaption class="modalCaption" id="siteModalCaption"></figcaption>
+  </figure>
+</div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>
