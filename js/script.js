@@ -73,18 +73,26 @@
   });
 
   /* ---------- 4) 全画面画像モーダル ---------- */
+  // サブディレクトリのページから読み込まれても images/ を解決できるよう、
+  // このスクリプト自身の src からサイトルートを求めて画像パスを絶対化する
+  var scriptEl = document.currentScript || (function () {
+    var scripts = document.querySelectorAll('script[src*="script.js"]');
+    return scripts[scripts.length - 1];
+  })();
+  var SITE_ROOT = scriptEl ? scriptEl.src.replace(/js\/script\.js(?:\?.*)?$/, '') : '';
+
   var MODAL_DATA = {
-    modalEigyo:   { src: 'images/workEigyo.png',   alt: '営業部門のイラスト拡大図',       caption: '01 営業' },
-    modalSeisaku: { src: 'images/workSeisaku.png', alt: '制作部門のイラスト拡大図',       caption: '02 制作' },
-    modalInsatsu: { src: 'images/workInsatsu.png', alt: '印刷部門のイラスト拡大図',       caption: '03 印刷' },
-    modalKako:    { src: 'images/workKako.png',    alt: '加工・物流部門のイラスト拡大図', caption: '04 加工・物流' },
-    modalSoumu:   { src: 'images/workSoumu.png',   alt: '総務部門のイラスト拡大図',       caption: '総務' },
-    modalDekita:  { src: 'images/workDekita.png',  alt: 'できたものが並ぶショールームのイラスト拡大図', caption: 'できたもの' },
-    modalMiura:   { src: 'images/photoMiura.jpg',  alt: '社員写真',                       caption: '営業' },
-    modalKojima:  { src: 'images/photoKojima.jpg', alt: '社員写真',                       caption: '営業' },
-    modalTakada:  { src: 'images/photoTakada.jpg', alt: '社員写真',                       caption: '営業 課長補佐' },
-    modalIrie:    { src: 'images/photoIrie.jpg',   alt: '社員写真',                       caption: '制作 次長' },
-    modalChida:   { src: 'images/photoChida.jpg',  alt: '社員写真',                       caption: '制作 課長補佐' }
+    modalEigyo:   { src: SITE_ROOT + 'images/workEigyo.png',   alt: '営業部門のイラスト拡大図',       caption: '01 営業' },
+    modalSeisaku: { src: SITE_ROOT + 'images/workSeisaku.png', alt: '制作部門のイラスト拡大図',       caption: '02 制作' },
+    modalInsatsu: { src: SITE_ROOT + 'images/workInsatsu.png', alt: '印刷部門のイラスト拡大図',       caption: '03 印刷' },
+    modalKako:    { src: SITE_ROOT + 'images/workKako.png',    alt: '加工・物流部門のイラスト拡大図', caption: '04 加工・物流' },
+    modalSoumu:   { src: SITE_ROOT + 'images/workSoumu.png',   alt: '総務部門のイラスト拡大図',       caption: '総務' },
+    modalDekita:  { src: SITE_ROOT + 'images/workDekita.png',  alt: 'できたものが並ぶショールームのイラスト拡大図', caption: 'できたもの' },
+    modalMiura:   { src: SITE_ROOT + 'images/photoMiura.jpg',  alt: '社員写真',                       caption: '営業' },
+    modalKojima:  { src: SITE_ROOT + 'images/photoKojima.jpg', alt: '社員写真',                       caption: '営業' },
+    modalTakada:  { src: SITE_ROOT + 'images/photoTakada.jpg', alt: '社員写真',                       caption: '営業 課長補佐' },
+    modalIrie:    { src: SITE_ROOT + 'images/photoIrie.jpg',   alt: '社員写真',                       caption: '制作 次長' },
+    modalChida:   { src: SITE_ROOT + 'images/photoChida.jpg',  alt: '社員写真',                       caption: '制作 課長補佐' }
   };
 
   var modal = document.getElementById('siteModal');
