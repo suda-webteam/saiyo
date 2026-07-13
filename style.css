@@ -426,27 +426,31 @@ body {
 .interviewTitle { margin-left: 315px; /* page基準 y=2694 x=315 */ }
 
 /* 写真5枚は等間隔(2px)の flex 行。上下の互い違いは margin-top で表現 */
-/* 社員インタビューの顔ぶれ(interview/index.html と共通の丸アバターカード) */
+/* 社員インタビューの顔ぶれ(interview/index.html と共通の丸アバターカード)
+   PCも1列の横スクロールで全員を見られるようにする */
 .memberList {
-  margin: 100px 0 0;
+  margin: 130px 0 0;
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-wrap: nowrap;
   align-items: flex-start;
-  gap: 28px 30px;
+  gap: 36px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 40px 16px;
 }
-.memberItem { position: relative; }
+.memberItem { position: relative; flex: 0 0 auto; }
+/* 1画面に5人程度見えるサイズ(1600px時: 250px + gap36px ≒ 5.3人) */
 .memberCard {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  width: 136px;
+  width: 250px;
   text-decoration: none;
 }
 .memberPhoto {
-  width: 136px;
-  height: 136px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
   overflow: hidden;
   background: #dfe6ea;
@@ -456,11 +460,11 @@ body {
 }
 .memberCard:hover .memberPhoto { transform: scale(1.04); }
 .memberPhoto img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.memberName { margin-top: 10px; font-size: 15px; font-weight: 700; color: var(--colorText); }
+.memberName { margin-top: 12px; font-size: 18px; font-weight: 700; color: var(--colorText); }
 /* グネグネ模様の上に乗っても読めるよう、うっすら白でふちどる */
 .memberRole {
-  margin-top: 2px;
-  font-size: 12px;
+  margin-top: 3px;
+  font-size: 14px;
   color: #666;
   text-shadow: 0 0 6px #fff, 0 0 3px #fff;
 }
@@ -1069,6 +1073,8 @@ body {
   }
   .memberCard { width: 110px; }
   .memberPhoto { width: 110px; height: 110px; }
+  .memberName { margin-top: 8px; font-size: 14px; }
+  .memberRole { margin-top: 2px; font-size: 11px; }
 
   /* ---- 若手座談会 ---- */
   .crossTalk {
