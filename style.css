@@ -1247,7 +1247,6 @@ body {
 .workSpotInsatsu { margin: 204.5px 0 0 983px; width: 118px; height: 124px; } /* y=2023 */
 .workSpotKako    { margin: 529.5px 0 0 873px; width: 224px; height: 118px; } /* y=2348 */
 .workSpotSoumu   { margin: 633.5px 0 0 313px; width: 112px; height: 118px; } /* y=2452 */
-.workSpotDekita  { margin: 683.5px 0 0 823px; width: 238px; height: 94px; }  /* y=2502 */
 
 /* ============================================================
   全画面モーダル
@@ -1327,6 +1326,190 @@ body.isModalOpen { overflow: hidden; }
 .modalClose::before { transform: translate(-50%, -50%) rotate(45deg); }
 .modalClose::after  { transform: translate(-50%, -50%) rotate(-45deg); }
 .modalClose:hover { background: #e9f5fd; }
+
+/* ============================================================
+  Work process 部門紹介モーダル
+  デザインカンプ(917x588)の座標をそのまま指定し、
+  パネル全体を transform: scale でビューポートにフィットさせる
+  (中身のDOMは js/script.js の WORK_MODAL_DATA から生成)
+============================================================ */
+.workModalPanel {
+  position: relative;
+  width: 917px;
+  height: 588px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 12px 44px rgba(0, 0, 0, 0.45);
+  font-family: var(--fontGothic);
+}
+
+.workModalIllustWrap { position: absolute; inset: 0; }
+.workModalIllust { display: block; width: 100%; height: 100%; }
+
+.workModalClose {
+  position: absolute;
+  top: 27px;
+  right: 30px;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.workModalClose::before,
+.workModalClose::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 2px;
+  background: var(--colorBrand);
+}
+.workModalClose::before { transform: translate(-50%, -50%) rotate(45deg); }
+.workModalClose::after  { transform: translate(-50%, -50%) rotate(-45deg); }
+.workModalClose:hover::before,
+.workModalClose:hover::after { background: #5f8cc4; }
+
+.workModalTitle { margin: 0; font-weight: 400; color: var(--colorText); }
+.workModalNum,
+.workModalName {
+  position: absolute;
+  z-index: 1;
+  font-size: 22px;
+  line-height: 1;
+}
+.workModalNum { font-weight: 700; letter-spacing: 0.1em; }
+.workModalName {
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+  text-align: center;
+}
+
+.workModalDesc {
+  position: absolute;
+  z-index: 1;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0.02em;
+  color: var(--colorText);
+}
+
+.workModalBtnList {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  list-style: none;
+}
+.workModalBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 237.5px;
+  height: 53.5px;
+  border-radius: 27px;
+  background: var(--colorBrand);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.workModalBtn:hover { opacity: 0.85; }
+.workModalBtnChevron {
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ---- 各部門のカンプ座標 ---- */
+.workModalEigyo .workModalNum       { left: 259px; top: 88px; }
+.workModalEigyo .workModalName      { left: 239px; top: 139px; width: 144px; }
+.workModalEigyo .workModalDesc      { left: 461px; top: 88px; }
+.workModalEigyo .workModalBtnList   { left: 631px; top: 311px; }
+
+.workModalSeisaku .workModalNum     { left: 247px; top: 90px; }
+.workModalSeisaku .workModalName    { left: 227px; top: 142px; width: 144px; }
+.workModalSeisaku .workModalDesc    { left: 461px; top: 88px; }
+.workModalSeisaku .workModalBtnList { left: 631px; top: 311px; }
+
+.workModalInsatsu .workModalNum     { left: 512px; top: 160px; }
+.workModalInsatsu .workModalName    { left: 424px; top: 213px; width: 143px; }
+.workModalInsatsu .workModalDesc    { left: 44px; top: 292px; }
+.workModalInsatsu .workModalBtnList { left: 44px; top: 493px; }
+
+.workModalKako .workModalNum        { left: 394px; top: 455px; }
+.workModalKako .workModalName       { left: 165px; top: 510px; width: 290px; letter-spacing: 0.1em; text-indent: 0.1em; }
+.workModalKako .workModalDesc       { left: 450px; top: 51px; }
+.workModalKako .workModalBtnList    { left: 631px; top: 268px; }
+
+.workModalSoumu .workModalName      { left: 319px; top: 419px; width: 141px; }
+.workModalSoumu .workModalDesc      { left: 427px; top: 108px; }
+.workModalSoumu .workModalBtnList   { left: 631px; top: 311px; }
+
+/* ---- SP:カンプ座標をやめて縦積みレイアウトに切り替える ---- */
+@media (max-width: 767px) {
+  .workModalBody {
+    width: 100%;
+    min-width: 0; /* フレックスアイテムの min-width:auto でパネルが膨らむのを防ぐ */
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+    border-radius: 8px;
+  }
+  .workModalPanel {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    padding: 50px 20px 28px;
+    transform: none !important;
+  }
+  .workModalClose { top: 6px; right: 6px; }
+  .workModalClose::before,
+  .workModalClose::after { width: 26px; }
+
+  .workModalTitle {
+    order: -1;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .workModalNum,
+  .workModalName {
+    position: static;
+    font-size: 20px;
+  }
+  .workModalName { width: auto !important; text-align: left; }
+
+  /* イラストはラベル文字入りでイラスト部分だけを切り出したSP用PNGに切り替わる
+     (script.js が生成する picture 要素の source で指定) */
+  .workModalIllustWrap { position: static; margin-top: 16px; }
+  .workModalIllust { width: 100%; max-width: 100%; height: auto; }
+
+  .workModalDesc {
+    position: static;
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.9;
+  }
+  .workModalDesc br { display: none; }
+
+  .workModalBtnList {
+    position: static;
+    margin-top: 20px;
+    align-items: center;
+    gap: 12px;
+  }
+}
 
 /* ---- SP:ラベルはタップしづらいためイラスト下にリンクを並べる ---- */
 @media (max-width: 767px) {

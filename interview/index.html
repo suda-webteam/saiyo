@@ -180,7 +180,6 @@
         <li><button type="button" class="workSpot workSpotInsatsu" data-modal="modalInsatsu"><span class="workSpotNum">03</span>印刷</button></li>
         <li><button type="button" class="workSpot workSpotKako" data-modal="modalKako"><span class="workSpotNum">04</span>加工・物流</button></li>
         <li><button type="button" class="workSpot workSpotSoumu" data-modal="modalSoumu">総務</button></li>
-        <li><button type="button" class="workSpot workSpotDekita" data-modal="modalDekita">できたもの</button></li>
       </ul>
     </section>
 
@@ -188,7 +187,7 @@
     <section class="interview iwInterview">
       <h2 class="sectionTitle interviewTitle">Interview</h2>
 
-      <div class="iwCategory">
+      <div class="iwCategory" id="iwEigyo">
         <p class="iwCategoryTitle">営業</p>
         <div class="iwCategoryRow">
           <a class="iwMemberCard" href="nm.html">
@@ -218,7 +217,7 @@
         </div>
       </div>
 
-      <div class="iwCategory">
+      <div class="iwCategory" id="iwSeisaku">
         <p class="iwCategoryTitle">制作</p>
         <div class="iwCategoryRow">
           <a class="iwMemberCard" href="mi.html">
@@ -248,7 +247,7 @@
         </div>
       </div>
 
-      <div class="iwCategory">
+      <div class="iwCategory" id="iwInsatsu">
         <p class="iwCategoryTitle">印刷</p>
         <div class="iwCategoryRow">
           <a class="iwMemberCard" href="hs.html">
@@ -274,7 +273,7 @@
         </div>
       </div>
 
-      <div class="iwCategory">
+      <div class="iwCategory" id="iwSoumu">
         <p class="iwCategoryTitle">総務</p>
         <div class="iwCategoryRow">
           <a class="iwMemberCard" href="st_somu.html">
@@ -360,7 +359,7 @@
 </div><!-- /.page -->
 </div><!-- /.pageScaler -->
 
-<!-- ===== 全画面モーダル(Work processのイラスト拡大表示) ===== -->
+<!-- ===== 全画面モーダル(Work processの部門紹介) ===== -->
 <div class="modal" id="siteModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="siteModalCaption">
   <div class="modalOverlay" data-modal-close></div>
   <figure class="modalBody">
@@ -368,6 +367,10 @@
     <img class="modalImage" src="" alt="" id="siteModalImage">
     <figcaption class="modalCaption" id="siteModalCaption"></figcaption>
   </figure>
+  <!-- Work process 各部門の紹介パネル(中身は script.js が生成) -->
+  <div class="workModalBody" id="workModalBody" hidden>
+    <div class="workModalPanel" id="workModalPanel"></div>
+  </div>
 </div>
 
 <script src="../js/script.js"></script>
