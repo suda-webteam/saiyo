@@ -693,7 +693,7 @@ body {
 /* ============================================================
   レスポンシブ対応
   - 1600px〜 : カンプ等倍
-  - 768〜1599px : PCデザインをJSで等倍縮小(ピクセルパーフェクト維持)
+  - 768〜1599px : カンプ等倍のまま横スクロール(縮小フィットは廃止)
   - 〜767px : SP専用レイアウト
 ============================================================ */
 
@@ -702,8 +702,9 @@ body {
 /* SP用UI(PCでは非表示) */
 .spHeader, .spDrawer, .isomeScrollNote { display: none; }
 
-@media (min-width: 768px) {
-  body { overflow-x: hidden; min-width: 0; }
+@media (min-width: 768px) and (max-width: 1599px) {
+  /* 1600px未満でもデザインを縮小せず、横スクロールで等倍表示する */
+  body { min-width: 1600px; }
 }
 @media (min-width: 1600px) {
   body { overflow-x: hidden; }
