@@ -426,17 +426,20 @@ body {
 .interviewTitle { margin-left: 315px; /* page基準 y=2694 x=315 */ }
 
 /* 写真5枚は等間隔(2px)の flex 行。上下の互い違いは margin-top で表現 */
-/* 社員インタビューの顔ぶれ(interview/index.html と共通の丸アバターカード) */
+/* 社員インタビューの顔ぶれ(interview/index.html と共通の丸アバターカード)
+   PCも1列の横スクロールで全員を見られるようにする */
 .memberList {
-  margin: 100px 0 0;
+  margin: 130px 0 0;
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-wrap: nowrap;
   align-items: flex-start;
-  gap: 28px 30px;
+  gap: 30px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 40px 16px;
 }
-.memberItem { position: relative; }
+.memberItem { position: relative; flex: 0 0 auto; }
 .memberCard {
   display: inline-flex;
   flex-direction: column;
