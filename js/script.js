@@ -82,7 +82,6 @@
   var SITE_ROOT = scriptEl ? scriptEl.src.replace(/js\/script\.js(?:\?.*)?$/, '') : '';
 
   var MODAL_DATA = {
-    modalDekita:  { src: SITE_ROOT + 'images/workDekita.png',  alt: 'できたものが並ぶショールームのイラスト拡大図', caption: 'できたもの' },
     modalMiura:   { src: SITE_ROOT + 'images/photoMiura.jpg',  alt: '社員写真',                       caption: '営業' },
     modalKojima:  { src: SITE_ROOT + 'images/photoKojima.jpg', alt: '社員写真',                       caption: '営業' },
     modalTakada:  { src: SITE_ROOT + 'images/photoTakada.jpg', alt: '社員写真',                       caption: '営業 課長補佐' },
@@ -139,7 +138,7 @@
       alt: '加工・物流部門の工場のイラスト',
       desc: '印刷された製品に対して、<br>断裁・製本・折加工など仕様に合わせて<br>様々な加工をスピーディーに行います。<br>加工が完了した製品は仕分けや梱包を施して発送します。<br>また、ケースの組み立てや丁合作業などの<br>内職作業も社内で実施可能です。',
       buttons: [
-        { label: '社員インタビュー', interviewAnchor: 'iwList' } /* 加工・物流のカテゴリは未掲載のため一覧先頭へ */
+        { label: '社員インタビュー', interviewAnchor: 'iwInsatsu' } /* 加工・物流のカテゴリは未掲載のため印刷カテゴリへ */
       ]
     },
     modalSoumu: {
