@@ -1,40 +1,16 @@
 /**
  * 株式会社須田製版 採用サイト TOP
- * 1) 768〜1599px:PCデザイン(1600px)を等倍縮小してフィット
- * 2) SPドロワーメニュー
- * 3) ページ内スムーススクロール
+ * 1) SPドロワーメニュー
+ * 2) ページ内スムーススクロール
+ * 3) 全画面モーダル
+ * ※768px以上はPCデザイン(1600px)を等倍表示(縮小フィットは廃止)
  */
 (function () {
   'use strict';
 
-  var DESIGN_WIDTH = 1600;
   var BREAKPOINT_SP = 768;
 
-  var page = document.querySelector('.page');
-  var scaler = document.querySelector('.pageScaler');
-
-  /* ---------- 1) 縮小フィット(768〜1599px) ---------- */
-  function fitPage() {
-    var vw = document.documentElement.clientWidth;
-
-    if (vw >= BREAKPOINT_SP && vw < DESIGN_WIDTH) {
-      var scale = vw / DESIGN_WIDTH;
-      page.style.transform = 'scale(' + scale + ')';
-      page.style.transformOrigin = 'top left';
-      scaler.style.height = page.offsetHeight * scale + 'px';
-    } else {
-      page.style.transform = '';
-      page.style.transformOrigin = '';
-      scaler.style.height = '';
-    }
-  }
-
-  window.addEventListener('resize', fitPage);
-  window.addEventListener('orientationchange', fitPage);
-  window.addEventListener('load', fitPage);
-  fitPage();
-
-  /* ---------- 2) SPドロワーメニュー ---------- */
+  /* ---------- 1) SPドロワーメニュー ---------- */
   var menuBtn = document.querySelector('.spMenuBtn');
 
   function setDrawer(open) {
@@ -49,9 +25,7 @@
     });
   }
 
-  /* ---------- 3) スムーススクロール ---------- */
-  // transform縮小中はレイアウト座標と表示座標がズレるため、
-  // 常に getBoundingClientRect ベース(scrollIntoView)でスクロールする
+  /* ---------- 2) スムーススクロール ---------- */
   document.querySelectorAll('a[href^="#"]').forEach(function (link) {
     if (link.hasAttribute('data-modal')) return; // モーダルトリガーは除外
     link.addEventListener('click', function (event) {
@@ -72,7 +46,7 @@
     });
   });
 
-  /* ---------- 4) 全画面画像モーダル ---------- */
+  /* ---------- 3) 全画面モーダル ---------- */
   // サブディレクトリのページから読み込まれても images/ を解決できるよう、
   // このスクリプト自身の src からサイトルートを求めて画像パスを絶対化する
   var scriptEl = document.currentScript || (function () {

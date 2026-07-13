@@ -43,9 +43,16 @@ body {
 }
 
 /* ---------- ページ基盤(カンプ座標系) ---------- */
+/* コンテンツ幅の上限を担う可変ラッパー(.pageScaler の内側・.page の外側) */
+.pageWrap {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
 .page {
   position: relative;
-  width: 1600px;
+  width: 100%;
   height: 4305px;
   margin: 0 auto;
   /* グネグネ模様を1600px外へ伸ばすため overflow は解放(横はビューポートで .pageScaler がクリップ) */
@@ -65,7 +72,7 @@ body {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr);
-  width: 1600px;
+  width: 100%;
   height: 843px;
 }
 /* minmax(0,1fr) + min-width/height:0 で、大きなマージンを持つ子が
@@ -107,7 +114,9 @@ body {
 
 /* ナビ本体もヒーローの grid スタック上に置き、内部も grid スタックで組む */
 .globalNav {
-  margin-left: 1296px;
+  /* カンプでは左1296px。1600px未満でもナビが見切れないよう右端基準で配置
+     (1600px時は 1600-304=1296 で従来と同一位置) */
+  justify-self: end;
   width: 304px;
   height: 843px;
   display: grid;
@@ -227,7 +236,7 @@ body {
   position: absolute;
   top: 950px;
   left: 0;
-  width: 1600px;
+  width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr);
@@ -366,7 +375,7 @@ body {
   position: absolute;
   top: 1818.5px; /* イラスト上端が基準 */
   left: 0;
-  width: 1600px;
+  width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr);
@@ -400,7 +409,7 @@ body {
   position: absolute;
   top: 2694px;
   left: 0;
-  width: 1600px;
+  width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr);
@@ -502,7 +511,7 @@ body {
   position: absolute;
   top: 3688.6px;
   left: 0;
-  width: 1600px;
+  width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr);
@@ -570,7 +579,7 @@ body {
   position: absolute;
   top: 3962.4px;
   left: 1px;
-  width: 1596px;
+  width: calc(100% - 4px); /* カンプ1600px時は従来どおり1596px */
   height: 342.5px;
   border-radius: 2px 2px 44px 44px;
   background: rgba(90, 204, 249, 0.3);
@@ -693,7 +702,7 @@ body {
 /* ============================================================
   レスポンシブ対応
   - 1600px〜 : カンプ等倍
-  - 768〜1599px : PCデザインをJSで等倍縮小(ピクセルパーフェクト維持)
+  - 768〜1599px : カンプ等倍のまま右側は見切れ(.pageWrapで上限1600pxの可変コンテナ)
   - 〜767px : SP専用レイアウト
 ============================================================ */
 
@@ -702,9 +711,6 @@ body {
 /* SP用UI(PCでは非表示) */
 .spHeader, .spDrawer, .isomeScrollNote { display: none; }
 
-@media (min-width: 768px) {
-  body { overflow-x: hidden; min-width: 0; }
-}
 @media (min-width: 1600px) {
   body { overflow-x: hidden; }
   .page { margin: 0 auto; }
