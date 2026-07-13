@@ -55,14 +55,6 @@
   })();
   var SITE_ROOT = scriptEl ? scriptEl.src.replace(/js\/script\.js(?:\?.*)?$/, '') : '';
 
-  var MODAL_DATA = {
-    modalMiura:   { src: SITE_ROOT + 'images/photoMiura.jpg',  alt: '社員写真',                       caption: '営業' },
-    modalKojima:  { src: SITE_ROOT + 'images/photoKojima.jpg', alt: '社員写真',                       caption: '営業' },
-    modalTakada:  { src: SITE_ROOT + 'images/photoTakada.jpg', alt: '社員写真',                       caption: '営業 課長補佐' },
-    modalIrie:    { src: SITE_ROOT + 'images/photoIrie.jpg',   alt: '社員写真',                       caption: '制作 次長' },
-    modalChida:   { src: SITE_ROOT + 'images/photoChida.jpg',  alt: '社員写真',                       caption: '制作 課長補佐' }
-  };
-
   /* Work process 各部門の紹介モーダル(917x588カンプの座標は style.css 側で指定)
      interviewAnchor は interview/index.html 内の各カテゴリのid */
   var WORK_MODAL_DATA = {
@@ -132,9 +124,6 @@
   var CHEVRON_SVG = '<svg class="workModalBtnChevron" viewBox="0 0 9 18" width="9" height="18" aria-hidden="true"><polyline points="0.6,17.2 8.2,9 0.6,0.8" fill="none" stroke="#fff" stroke-width="1.2"/></svg>';
 
   var modal = document.getElementById('siteModal');
-  var modalFigure = modal ? modal.querySelector('.modalBody') : null;
-  var modalImage = document.getElementById('siteModalImage');
-  var modalCaption = document.getElementById('siteModalCaption');
   var workModalBody = document.getElementById('workModalBody');
   var workModalPanel = document.getElementById('workModalPanel');
   var isInterviewListPage = document.body.classList.contains('interviewListPage');
@@ -198,30 +187,17 @@
   }
 
   function openModal(key) {
-    if (!modal) return;
+    if (!modal || !WORK_MODAL_DATA[key]) return;
 
-    if (WORK_MODAL_DATA[key]) {
-      buildWorkModal(key);
-      modalFigure.hidden = true;
-      workModalBody.hidden = false;
-      modal.setAttribute('aria-labelledby', 'workModalTitle');
-      fitWorkModal();
-    } else {
-      var d = MODAL_DATA[key];
-      if (!d) return;
-      modalImage.src = d.src;
-      modalImage.alt = d.alt;
-      modalCaption.textContent = d.caption;
-      modalFigure.hidden = false;
-      workModalBody.hidden = true;
-      modal.setAttribute('aria-labelledby', 'siteModalCaption');
-    }
+    buildWorkModal(key);
+    workModalBody.hidden = false;
+    fitWorkModal();
 
     modal.classList.add('isOpen');
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('isModalOpen');
     lastFocused = document.activeElement;
-    var closeBtn = modal.querySelector(workModalBody.hidden ? '.modalClose' : '.workModalClose');
+    var closeBtn = modal.querySelector('.workModalClose');
     if (closeBtn) closeBtn.focus();
   }
 

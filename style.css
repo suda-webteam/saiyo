@@ -426,21 +426,44 @@ body {
 .interviewTitle { margin-left: 315px; /* page基準 y=2694 x=315 */ }
 
 /* 写真5枚は等間隔(2px)の flex 行。上下の互い違いは margin-top で表現 */
+/* 社員インタビューの顔ぶれ(interview/index.html と共通の丸アバターカード) */
 .memberList {
-  margin: 107.5px 0 0 17px; /* 上段写真の上端 y=2801.5 / 左端 x=17 */
+  margin: 100px 0 0;
+  width: 100%;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: flex-start;
-  gap: 2px;
+  gap: 28px 30px;
 }
 .memberItem { position: relative; }
-.memberItem img { width: 100%; height: auto; transition: transform 0.3s; }
-.memberItem a:hover img { transform: scale(1.04); }
-
-.memberMiura  { margin-top: 0.5px;  width: 313.5px; }
-.memberKojima { margin-top: 74.5px; width: 313.5px; }
-.memberTakada { width: 317.5px; }
-.memberIrie   { margin-top: 69.5px; width: 313.5px; }
-.memberChida  { width: 317px; }
+.memberCard {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 136px;
+  text-decoration: none;
+}
+.memberPhoto {
+  width: 136px;
+  height: 136px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #dfe6ea;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 12px rgba(60, 90, 120, 0.18);
+  transition: transform 0.25s;
+}
+.memberCard:hover .memberPhoto { transform: scale(1.04); }
+.memberPhoto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.memberName { margin-top: 10px; font-size: 15px; font-weight: 700; color: var(--colorText); }
+/* グネグネ模様の上に乗っても読めるよう、うっすら白でふちどる */
+.memberRole {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #666;
+  text-shadow: 0 0 6px #fff, 0 0 3px #fff;
+}
 
 /* ---------- 若手座談会(コラージュを grid スタックで重ねる) ---------- */
 /* 原点 = ペーパークリップ上端 y=3266 / 左付箋左端 x=146 (interview基準 y=572) */
@@ -1029,6 +1052,8 @@ body {
 
   .memberList {
     display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
     gap: 14px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -1042,7 +1067,8 @@ body {
     width: auto;
     scroll-snap-align: center;
   }
-  .memberItem img { width: auto; height: 235px; }
+  .memberCard { width: 110px; }
+  .memberPhoto { width: 110px; height: 110px; }
 
   /* ---- 若手座談会 ---- */
   .crossTalk {
@@ -1279,60 +1305,6 @@ body.isModalOpen { overflow: hidden; }
   cursor: pointer;
 }
 
-.modalBody {
-  position: relative;
-  margin: 0;
-  max-width: min(1200px, 94vw);
-}
-
-.modalImage {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: calc(100vh - 150px);
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 12px 44px rgba(0, 0, 0, 0.45);
-}
-
-.modalCaption {
-  margin-top: 14px;
-  text-align: center;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-indent: 0.18em;
-}
-
-.modalClose {
-  position: absolute;
-  top: -18px;
-  right: -18px;
-  z-index: 1;
-  width: 46px;
-  height: 46px;
-  border: 1.5px solid var(--colorBrand);
-  border-radius: 50%;
-  background: #fff;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-.modalClose::before,
-.modalClose::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 20px;
-  height: 2px;
-  background: var(--colorBrand);
-}
-.modalClose::before { transform: translate(-50%, -50%) rotate(45deg); }
-.modalClose::after  { transform: translate(-50%, -50%) rotate(-45deg); }
-.modalClose:hover { background: #e9f5fd; }
-
 /* ============================================================
   Work process 部門紹介モーダル
   デザインカンプ(917x588)の座標をそのまま指定し、
@@ -1554,10 +1526,6 @@ body.isModalOpen { overflow: hidden; }
   .workSpotNum { margin-right: 5px; font-size: 12px; }
 
   .modal { padding: 16px; }
-  .modalBody { max-width: 100%; }
-  .modalImage { max-height: calc(100vh - 130px); }
-  .modalCaption { font-size: 14px; }
-  .modalClose { top: -14px; right: -4px; width: 42px; height: 42px; }
 }
 
 /* ============================================================
