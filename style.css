@@ -448,26 +448,42 @@ body {
   width: 250px;
   text-decoration: none;
 }
+/* 楕円写真+開いた青リング+弧に沿う部署・役職(memberPhoto.svgのデザイン)
+   文字は inline SVG の textPath による打ち文字(HTML側で書き換え可能) */
 .memberPhoto {
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: #dfe6ea;
-  border: 3px solid #fff;
-  box-shadow: 0 4px 12px rgba(60, 90, 120, 0.18);
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
   transition: transform 0.25s;
 }
 .memberCard:hover .memberPhoto { transform: scale(1.04); }
-.memberPhoto img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.memberName { margin-top: 12px; font-size: 18px; font-weight: 700; color: var(--colorText); }
-/* グネグネ模様の上に乗っても読めるよう、うっすら白でふちどる */
-.memberRole {
-  margin-top: 3px;
-  font-size: 14px;
-  color: #666;
-  text-shadow: 0 0 6px #fff, 0 0 3px #fff;
+.memberPhotoBg { fill: #dfe6ea; }
+.memberPhotoRing {
+  fill: none;
+  stroke: #1f5395;
+  stroke-width: 1.5px;
+  stroke-miterlimit: 10;
 }
+.memberPhotoRole {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  fill: var(--colorBrand);
+}
+.memberPhotoPlus circle {
+  fill: var(--colorBrand);
+  stroke: var(--colorBrand);
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.memberPhotoPlus line {
+  stroke: #fff;
+  stroke-width: 3px;
+  stroke-linecap: round;
+}
+.memberName { margin-top: 6px; font-size: 18px; font-weight: 700; color: var(--colorText); }
 
 /* ---------- 若手座談会(コラージュを grid スタックで重ねる) ---------- */
 /* 原点 = ペーパークリップ上端 y=3266 / 左付箋左端 x=146 (interview基準 y=572) */
@@ -1071,10 +1087,9 @@ body {
     width: auto;
     scroll-snap-align: center;
   }
-  .memberCard { width: 110px; }
-  .memberPhoto { width: 110px; height: 110px; }
-  .memberName { margin-top: 8px; font-size: 14px; }
-  .memberRole { margin-top: 2px; font-size: 11px; }
+  /* 弧に沿った文字が読める大きさを確保する */
+  .memberCard { width: 170px; }
+  .memberName { margin-top: 2px; font-size: 14px; }
 
   /* ---- 若手座談会 ---- */
   .crossTalk {
